@@ -1,0 +1,57 @@
+//
+//  View.swift
+//  BBSwift
+//
+//  Created by Benjamin Bourasseau on 18/06/2020.
+//
+
+import Foundation
+import SwiftUI
+
+/// MARK: Modifiers
+
+#if !os(macOS)
+
+public extension View {
+    
+    func banner(data: Binding<BannerData>, show: Binding<Bool>) -> some View {
+        self.modifier(BannerModifier(data: data, show: show))
+    }
+    
+    @available(OSX 10.15.0, *)
+    func imagePickable(image: Binding<UIImage?>) -> some View {
+        self.modifier(ImagePickerModifier(image: image))
+    }
+    
+}
+
+/// MARK: Router stack
+public extension View {
+
+    /// Get the current navigation controller
+    public var rootVC: UINavigationController? {
+        guard let scene = UIApplication.shared.connectedScenes.first,
+            let sceneDelegate = scene as? UIWindowScene,
+            let rootvc = sceneDelegate.windows.first?.rootViewController
+                as? UINavigationController else { return nil }
+        return rootvc
+    }
+
+    /// Shortcut to push views
+    func push<Content: View>(view: Content, animated: Bool = true) {
+        rootVC?.pushViewController(UIHostingController(rootView: view), animated: animated)
+    }
+
+    func setRootNavigation<Content: View>(view: Content, animated: Bool = true) {
+        rootVC?.setViewControllers([UIHostingController(rootView: view)], animated: animated)
+    }
+
+    func pop(animated: Bool = true) {
+        rootVC?.popViewController(animated: animated)
+    }
+
+    func popToRoot(animated: Bool = true) {
+        rootVC?.popToRootViewController(animated: animated)
+    }
+}
+#endif
