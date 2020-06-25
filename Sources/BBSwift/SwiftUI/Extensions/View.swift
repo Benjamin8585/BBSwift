@@ -14,15 +14,20 @@ import SwiftUI
 
 public extension View {
     
+    /// Add a banner to the view
     func banner(data: Binding<BannerData>, show: Binding<Bool>) -> some View {
         self.modifier(BannerModifier(data: data, show: show))
     }
     
-    @available(OSX 10.15.0, *)
+    /// Add an image picker to the view
     func imagePickable(image: Binding<UIImage?>) -> some View {
         self.modifier(ImagePickerModifier(image: image))
     }
     
+    /// Transform the view as a popup
+    func popupify(showPopup: Binding<Bool>, backgroundColor: Color = Color.black.opacity(0.4), closeOnTap: Bool = false) -> some View {
+        self.modifier(PopupModifier(showPopup: showPopup, backgroundColor: backgroundColor, closeOnTap: closeOnTap))
+    }
 }
 
 /// MARK: Router stack

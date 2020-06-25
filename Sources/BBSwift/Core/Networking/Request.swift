@@ -32,7 +32,9 @@ extension APIRoutes: URLRequestConvertible {
 }
 
 extension APIRoutes: Requestable {
-    func request<T>(type: Array<T>.Type) -> AnyPublisher<[T], APIError> where T: JSONContructible {
+    
+    /// Request the server and return array of objects. You need to provide the type of the object inside array response
+    func request<T>(type: Array<T>.Type = Array<DontParse.self>) -> AnyPublisher<[T], APIError> where T: JSONContructible {
         let request = try! self.asURLRequest()
         self.logRequest(request: request)
         let startDate = Date()
@@ -47,7 +49,8 @@ extension APIRoutes: Requestable {
             .eraseToAnyPublisher()
     }
 
-    func request<T>(type: T.Type) -> AnyPublisher<T, APIError> where T: JSONContructible {
+    /// Request the server and return an object. You need to provide the type of the object
+    func request<T>(type: T.Type = DontParse.self) -> AnyPublisher<T, APIError> where T: JSONContructible {
         let request = try! self.asURLRequest()
          logRequest(request: request)
          let startDate = Date()

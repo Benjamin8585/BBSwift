@@ -14,6 +14,16 @@ public protocol JSONContructible {
     init(json: JSON) throws
 }
 
+/// Use this class if you don't want to parse the response
+public struct DontParse: JSONContructible {
+    
+    let json: JSON
+    
+    public init(json: JSON) throws {
+        self.json = json
+    }
+}
+
 public struct HTTPMethod: RawRepresentable, Equatable, Hashable {
     public static let connect = HTTPMethod(rawValue: "CONNECT")
     public static let delete = HTTPMethod(rawValue: "DELETE")

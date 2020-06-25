@@ -14,7 +14,7 @@ enum TriangleDirection {
     case down, up, right, left
 }
 
-struct TriangleIndicator: View {
+public struct TriangleIndicator: View {
 
     var width: CGFloat
     var height: CGFloat
