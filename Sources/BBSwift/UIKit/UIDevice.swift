@@ -6,7 +6,6 @@
 //
 
 import Foundation
-#if !os(macOS)
 import UIKit
 
 /// Used for determining the type of the device. Do not use it for sizes or for
@@ -322,4 +321,3 @@ public extension UIDevice {
         return ProcessInfo.processInfo.isLowPowerModeEnabled
     }
 }
-#endif

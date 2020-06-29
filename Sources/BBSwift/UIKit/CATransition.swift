@@ -6,7 +6,6 @@
 //
 
 import Foundation
-#if !os(macOS)
 import UIKit
 
 public extension CATransition {
@@ -60,4 +59,3 @@ public extension CATransition {
         return transition
     }
 }
-#endif

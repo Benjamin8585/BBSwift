@@ -6,8 +6,6 @@
 //
 
 import Foundation
-
-#if !os(macOS)
 import SwiftUI
 
 /// An observer, currentheight observes Keyboard height
@@ -38,4 +36,3 @@ public final class KeyboardResponder: ObservableObject {
         currentHeight = 0
     }
 }
-#endif

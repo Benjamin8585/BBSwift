@@ -6,7 +6,6 @@
 //  Copyright © 2019 Jean-Marc Boullianne. All rights reserved.
 //
 
-#if !os(macOS)
 import SwiftUI
 
 public struct BannerData {
@@ -19,7 +18,12 @@ public struct BannerData {
     }
 }
 
-public enum BannerType {
+protocol BannerTypeRepresentable {
+    
+    var tintColor: Color { get }
+}
+
+public enum BannerType: BannerTypeRepresentable {
     
     case info
     case warning
@@ -29,13 +33,13 @@ public enum BannerType {
     public var tintColor: Color {
         switch self {
         case .info:
-            return Colors.Background.blue
+            return BBColor.Banner.blue
         case .success:
-            return Colors.Background.green
+            return BBColor.Banner.green
         case .warning:
-            return Colors.Background.yellow
+            return BBColor.Banner.yellow
         case .error:
-            return Colors.Background.error
+            return BBColor.Banner.red
         }
     }
 }
@@ -104,4 +108,3 @@ struct Banner_Previews: PreviewProvider {
         }
     }
 }
-#endif

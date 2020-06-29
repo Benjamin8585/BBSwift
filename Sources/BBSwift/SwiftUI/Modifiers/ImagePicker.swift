@@ -6,8 +6,6 @@
 //
 
 import Foundation
-
-#if !os(macOS)
 import SwiftUI
 
 public struct ImagePickerModifier: ViewModifier {
@@ -18,17 +16,17 @@ public struct ImagePickerModifier: ViewModifier {
     
     @Binding var image: UIImage?
 
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         content.onTapGesture {
             self.showActionSheet = true
         }
         .actionSheet(isPresented: $showActionSheet) {
-            ActionSheet(title: Text(BBSwift.instance.options.pickerTitle), message: Text(BBSwift.instance.options.pickerMessage), buttons: [
-                .default(Text(BBSwift.instance.options.pickerLibraryText)) {
+            ActionSheet(title: Text(BBSwift.instance.options.picker.title), message: Text(BBSwift.instance.options.picker.message), buttons: [
+                .default(Text(BBSwift.instance.options.picker.library)) {
                     self.pickerType = .photoLibrary
                     self.showImagePicker = true
                 },
-                .default(Text(BBSwift.instance.options.pickerCameraText)) {
+                .default(Text(BBSwift.instance.options.picker.camera)) {
                     self.pickerType = .camera
                     self.showImagePicker = true
                 },
@@ -93,4 +91,3 @@ struct ImagePicker_Previews: PreviewProvider {
         ImagePicker(isShown: .constant(false), image: .constant(UIImage()), sourceType: .constant(.photoLibrary))
     }
 }
-#endif

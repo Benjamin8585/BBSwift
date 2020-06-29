@@ -6,7 +6,6 @@
 //
 
 import Foundation
-#if !os(macOS)
 import SwiftUI
 
 /// Easy loading button
@@ -26,7 +25,7 @@ public struct ActionButton: View {
         self.top = top
     }
 
-    var body: some View {
+    public var body: some View {
         ZStack {
             self.buttonInfo.color
             HStack {
@@ -59,5 +58,3 @@ struct ActionButton_Previews: PreviewProvider {
         }
     }
 }
-
-#endif

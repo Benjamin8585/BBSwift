@@ -6,8 +6,6 @@
 //
 
 import Foundation
-
-#if !os(macOS)
 import SwiftUI
 
 public struct ForEachIndex<Data: RandomAccessCollection, ID: Hashable, Content: View>: View {
@@ -38,7 +36,7 @@ public struct ForEachIndex<Data: RandomAccessCollection, ID: Hashable, Content: 
 }
 
 public extension ForEachIndex where ID == Data.Element.ID, Content: View, Data.Element: Identifiable {
-    public init(_ data: Data, @ViewBuilder content: @escaping (_ index: Data.Index, _ element: Data.Element) -> Content) {
+    init(_ data: Data, @ViewBuilder content: @escaping (_ index: Data.Index, _ element: Data.Element) -> Content) {
         self.init(data, id: \.id, content: content)
     }
 }
@@ -60,4 +58,3 @@ private struct IndexInfo<Index, Element, ID: Hashable>: Hashable {
         self.elementID.hash(into: &hasher)
     }
 }
-#endif

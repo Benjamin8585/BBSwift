@@ -6,8 +6,6 @@
 //
 
 import Foundation
-
-#if !os(macOS)
 import SwiftUI
 
 public struct ProgressBar: View {
@@ -17,15 +15,15 @@ public struct ProgressBar: View {
     var backgroundColor: Color
     var indicatorColor: Color
 
-    var body: some View {
+    public var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
                 Rectangle().frame(width: geometry.size.width, height: geometry.size.height)
                     .opacity(0.3)
-                    .foregroundColor(indicatorColor)
+                    .foregroundColor(self.indicatorColor)
 
                 Rectangle().frame(width: min(CGFloat(self.value)*geometry.size.width, geometry.size.width), height: geometry.size.height)
-                    .foregroundColor(backgroundColor)
+                    .foregroundColor(self.backgroundColor)
                     .animation(.linear)
             }.cornerRadius(45.0)
         }
@@ -41,7 +39,7 @@ public struct InfiniteProgressBar: View {
     var backgroundColor: Color
     var indicatorColor: Color
 
-    var body: some View {
+    public var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
                 Rectangle().frame(width: geometry.size.width, height: geometry.size.height)
@@ -63,16 +61,23 @@ public struct InfiniteProgressBar: View {
     }
 }
 
-struct ProgressBar_Previews: PreviewProvider {
+struct ProgressBarWrapper: View {
     
     @State var progressValue: Float = 0.30
     
+    var body: some View {
+        ProgressBar(value: $progressValue, backgroundColor: Color.white, indicatorColor: BBColor.green).frame(height: 20)
+    }
+    
+}
+
+struct ProgressBar_Previews: PreviewProvider {
+    
     static var previews: some View {
         VStack {
-            ProgressBar(value: $progressValue, backgroundColor: Color.white, indicatorColor: Colors.green).frame(height: 20)
-            InfiniteProgressBar(backgroundColor: Color.white, indicatorColor: Colors.green).frame(height: 20)
+            ProgressBarWrapper()
+            InfiniteProgressBar(backgroundColor: Color.white, indicatorColor: BBColor.green).frame(height: 20)
             Spacer()
         }.padding()
     }
 }
-#endif

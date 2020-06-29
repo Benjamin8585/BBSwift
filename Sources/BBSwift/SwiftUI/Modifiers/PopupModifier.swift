@@ -6,9 +6,6 @@
 //
 
 import Foundation
-
-
-#if !os(macOS)
 import SwiftUI
 
 public struct PopupModifier: ViewModifier {
@@ -17,7 +14,7 @@ public struct PopupModifier: ViewModifier {
     var backgroundColor: Color
     var closeOnTap: Bool
     
-    func body(content: Content) -> some View {
+    public func body(content: Content) -> some View {
         ZStack {
             if self.showPopup {
                 ZStack {
@@ -33,5 +30,3 @@ public struct PopupModifier: ViewModifier {
     }
 
 }
-
-#endif

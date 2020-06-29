@@ -6,17 +6,17 @@
 //
 
 import Foundation
-#if !os(macOS)
 import SwiftUI
 import UIKit
 
 public protocol Route {
     
+    associatedtype RoutedView: View
+    
     /// Return the view to be pushed/presented by the router
-    func associatedView() -> some View
+    func associatedView() -> RoutedView
     
     /// Return the status bar style of the view to be push/presented
     func statusBarStyle() -> UIStatusBarStyle
     
 }
-#endif

@@ -10,8 +10,6 @@ import SwiftUI
 
 /// MARK: Modifiers
 
-#if !os(macOS)
-
 public extension View {
     
     /// Add a banner to the view
@@ -59,4 +57,3 @@ public extension View {
         rootVC?.popToRootViewController(animated: animated)
     }
 }
-#endif

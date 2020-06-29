@@ -58,8 +58,45 @@ public protocol URLRequestConvertible {
 public enum APIError: Error, Equatable {
 
     case unexpected
-    case encodingFailed(response: URLResponse?, data: Data)
+    case encodingFailed
+    case decodingFailed(response: URLResponse?, data: Data)
     case badGateway, internalServerError, tooManyRequests, notFound, tokenExpired
     case networkCallCancelled
+    case fromServer(String, Int, String)
+    case custom(error: Error)
+    case json
+    
+    var value: Int {
+        switch self {
+        case .unexpected:
+            return 0
+        case .encodingFailed:
+            return 1
+        case .decodingFailed:
+            return 2
+        case .networkCallCancelled:
+            return 3
+        case .json:
+            return 4
+        case .tokenExpired:
+            return 401
+        case .notFound:
+            return 404
+        case .tooManyRequests:
+                return 429
+        case .internalServerError:
+            return 500
+            case .badGateway:
+                return 502
+        case .fromServer(_, let code, _):
+            return code
+        case .custom(let error):
+            return Int(error.localizedDescription) ?? -1
+        }
+    }
+    
+    public static func ==(lhs: APIError, hrs: APIError) -> Bool {
+        return lhs.value == hrs.value
+    }
     
 }

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-#if !os(macOS)
 import SwiftUI
 
 public struct GrowingTextView: View {
@@ -22,7 +21,7 @@ public struct GrowingTextView: View {
     let maxHeight: CGFloat
     
     /// Create a Growing text view. If no placeholder is provided the color is set to textColor. minHeight and maxheight are the min and max size of the textview
-    init(text: Binding<String>, placeholder: String, textColor: Color, placeholderColor: Color? = nil,  minHeight: CGFloat = 39.0, maxHeight: CGFloat = 150.0) {
+    init(text: Binding<String>, placeholder: String, textColor: Color = BBColor.Text.lightBlack, placeholderColor: Color? = nil,  minHeight: CGFloat = 39.0, maxHeight: CGFloat = 150.0) {
         self._text = text
         self.placeholder = placeholder
         self.textColor = textColor
@@ -35,7 +34,7 @@ public struct GrowingTextView: View {
         min(max(minHeight, contentHeight), maxHeight)
     }
 
-    var body: some View {
+    public var body: some View {
         TextViewWrapper(placeholder: self.placeholder, placeholderColor: placeholderColor, textColor: textColor, text: $text, focused: $focused, contentHeight: $contentHeight).frame(height: countedHeight).padding(.leading, 5.0)
     }
 }
@@ -60,7 +59,7 @@ public struct TextViewWrapper: UIViewRepresentable {
     }
 
     // MARK: - UIViewRepresentable
-    func makeUIView(context: Context) -> UITextView {
+    public func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
         textView.delegate = context.coordinator
         textView.font = .systemFont(ofSize: 16)
@@ -69,7 +68,7 @@ public struct TextViewWrapper: UIViewRepresentable {
         return textView
     }
 
-    func makeCoordinator() -> Coordinator {
+    public func makeCoordinator() -> Coordinator {
         Coordinator(text: $text, focused: $focused, contentHeight: $contentHeight)
     }
     
@@ -93,12 +92,12 @@ public struct TextViewWrapper: UIViewRepresentable {
         }
     }
 
-    func updateUIView(_ uiView: UITextView, context: Context) {
+    public func updateUIView(_ uiView: UITextView, context: Context) {
         uiView.text = getText()
         uiView.textColor = getColor()
     }
 
-    class Coordinator: NSObject, UITextViewDelegate {
+    public class Coordinator: NSObject, UITextViewDelegate {
 
         @Binding private var text: String
         @Binding private var focused: Bool
@@ -111,16 +110,16 @@ public struct TextViewWrapper: UIViewRepresentable {
         }
 
         // MARK: - UITextViewDelegate
-        func textViewDidChange(_ textView: UITextView) {
+        public func textViewDidChange(_ textView: UITextView) {
             self.text = textView.text
             self.contentHeight = textView.contentSize.height
         }
 
-        func textViewDidBeginEditing(_ textView: UITextView) {
+        public func textViewDidBeginEditing(_ textView: UITextView) {
             self.focused = true
         }
 
-        func textViewDidEndEditing(_ textView: UITextView) {
+        public func textViewDidEndEditing(_ textView: UITextView) {
             self.focused = false
             self.contentHeight = text.emptyFiltered() == nil ? 0 : textView.contentSize.height
         }
@@ -136,4 +135,3 @@ struct GrowingTextView_Previews: PreviewProvider {
         }
     }
 }
-#endif

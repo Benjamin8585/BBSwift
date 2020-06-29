@@ -1,14 +1,24 @@
 
 import Foundation
 
+
+public enum LogRequestMode {
+    case all, requestOnly, responseOnly, none
+}
+
+public struct BBPickerOptions {
+    public var title: String = "Pick an image"
+    public var message: String = "Choose where to pick an image"
+    public var camera: String = "from Camera"
+    public var library: String = "from Library"
+}
+
+
 public struct BBOptions {
     
-    #if !os(macOS)
-    public var pickerTitle: String = "Pick an image"
-    public var pickerMessage: String = "Choose where to pick an image"
-    public var pickerCameraText: String = "from Camera"
-    public var pickerLibraryText: String = "from Library"
-    #endif
+    var picker: BBPickerOptions = BBPickerOptions()
+    
+    public var logRequestMode: LogRequestMode = .none
     
 }
 
@@ -17,10 +27,7 @@ public struct BBSwift {
     static private(set) var instance: BBSwift = BBSwift(options: BBOptions())
     
     var options: BBOptions
-
-    #if !os(macOS)
     var router: Router!
-    #endif
     
     public var localizationLanguage: String?
     public var bundle: Bundle = Bundle.main
@@ -30,11 +37,9 @@ public struct BBSwift {
         self.options = options
     }
     
-    #if !os(macOS)
-    func configureRouter(navigationController: NavigationController) {
+    mutating func configureRouter(navigationController: NavigationController) {
         self.router = Router(root: navigationController)
     }
-    #endif
     /// If you want the localize function to override the default phone language
     public static func setLocalizationLanguage(lang: String) {
         BBSwift.instance.localizationLanguage = lang

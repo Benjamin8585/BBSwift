@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-#if !os(macOS)
 import UIKit
 
 /// Trasnform Color to UIColor
@@ -33,4 +32,3 @@ extension Color {
         return (r, g, b, a)
     }
 }
-#endif

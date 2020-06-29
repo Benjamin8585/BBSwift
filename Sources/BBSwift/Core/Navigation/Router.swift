@@ -6,7 +6,6 @@
 //
 
 import Foundation
-#if !os(macOS)
 import UIKit
 import SwiftUI
 
@@ -18,7 +17,7 @@ public class NavigationController: UINavigationController {
         }
     }
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
+    public override var preferredStatusBarStyle: UIStatusBarStyle {
         return statusBarStyle
     }
 }
@@ -95,22 +94,22 @@ public class Router {
 public extension Router {
 
     /// Push the route provided
-    public func push(route: Route) {
+    func push(route: Route) {
         self.push(view: route.associatedView(), statusBarStyle: route.statusBarStyle())
     }
 
     /// Push the route provided, but on the left side
-    public func pushLeft(route: Route) {
+    func pushLeft(route: Route) {
         self.push(view: route.associatedView(), statusBarStyle: route.statusBarStyle(), transition: CATransition.popFromLeft())
     }
 
     /// Replace current navigation by the current route
-    public func setRoot(route: Route) {
+    func setRoot(route: Route) {
         self.setRootNavigation(view: route.associatedView(), statusBarStyle: route.statusBarStyle())
     }
 
     /// Present the route modally
-    public func showModal(route: Route, style: UIModalPresentationStyle = .automatic, animated: Bool = true, completion: (() -> Void)? = {}) {
+    func showModal(route: Route, style: UIModalPresentationStyle = .automatic, animated: Bool = true, completion: (() -> Void)? = {}) {
         let hosting = UIHostingController(rootView: route.associatedView() as! AnyView)
         hosting.modalPresentationStyle = style
         let nav = UINavigationController(rootViewController: hosting)
@@ -118,4 +117,3 @@ public extension Router {
     }
 
 }
-#endif

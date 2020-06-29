@@ -15,7 +15,7 @@ public struct PlaceholderOverlay: View {
     var isLoading: Bool
     var showPlaceholderCondition: Bool
 
-    var body: some View {
+    public var body: some View {
         ZStack {
             Group {
                 if !isLoading && !showPlaceholderCondition {
@@ -44,7 +44,7 @@ public struct PlaceholderView: View {
     var image: String
     var text: String
 
-    var body: some View {
+    public var body: some View {
         VStack {
             Image(self.image).resizable().frame(width: 100, height: 100).padding(.bottom, 20.0)
             Text(self.text).foregroundColor(BBColor.Text.lightBlack).font(.headline).bold()

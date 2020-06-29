@@ -12,7 +12,7 @@ public struct ButtonActivityIndicator: View {
 
     @State private var isAnimating: Bool = false
 
-    var body: some View {
+    public var body: some View {
 
       GeometryReader { (geometry: GeometryProxy) in
         ForEach(0..<5) { index in

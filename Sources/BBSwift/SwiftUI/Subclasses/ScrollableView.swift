@@ -6,8 +6,8 @@
 //
 
 import Foundation
-#if !os(macOS)
 import SwiftUI
+import Introspect
 
 public struct ScrollableView<Content>: View where Content: View {
     
@@ -28,7 +28,7 @@ public struct ScrollableView<Content>: View where Content: View {
         self.scrollAnimated = animated
     }
 
-    var body : some View {
+    public var body : some View {
         ScrollView {
             content
         }.introspectScrollView { (sv) in
@@ -61,4 +61,3 @@ struct ScrollableView_Previews: PreviewProvider {
         }
     }
 }
-#endif

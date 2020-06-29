@@ -6,7 +6,6 @@
 //
 
 import Foundation
-#if !os(macOS)
 import SwiftUI
 
 public struct IfLet<T, Out: View>: View {
@@ -18,7 +17,7 @@ public struct IfLet<T, Out: View>: View {
         self.produce = produce
     }
 
-    var body: some View {
+    public var body: some View {
         Group {
             if value != nil {
                 produce(value!)
@@ -26,4 +25,3 @@ public struct IfLet<T, Out: View>: View {
         }
     }
 }
-#endif

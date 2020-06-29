@@ -6,8 +6,6 @@
 //
 
 import Foundation
-
-#if !os(macOS)
 import SwiftUI
 
 enum TriangleDirection {
@@ -41,7 +39,7 @@ public struct TriangleIndicator: View {
         }
     }
 
-    var body: some View {
+    public var body: some View {
         Group {
             Path { path in
                 path.move(to: CGPoint(x: 0, y: 0))
@@ -63,4 +61,3 @@ struct TriangleIndicator_Previews: PreviewProvider {
         }
     }
 }
-#endif

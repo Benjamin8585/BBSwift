@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 public struct IsPreview: EnvironmentKey {
-    static let defaultValue: Bool = false
+    public static let defaultValue: Bool = false
 }
 
 public extension EnvironmentValues {

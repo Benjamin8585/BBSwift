@@ -7,15 +7,15 @@
 
 import Foundation
 import Combine
-#if !os(macOS)
 import SwiftUI
+import Gloss
 
 extension APIRoutes: URLRequestConvertible {
     
     // MARK: - URLRequestConvertible
     func asURLRequest() throws -> URLRequest {
         
-        var urlRequest = URLRequest(url: self.baseUrl)
+        var urlRequest = URLRequest(url: self.baseUrl.toUrl()!)
        // HTTP Method
         urlRequest.httpMethod = method.rawValue
         urlRequest.allHTTPHeaderFields = headers
@@ -34,14 +34,14 @@ extension APIRoutes: URLRequestConvertible {
 extension APIRoutes: Requestable {
     
     /// Request the server and return array of objects. You need to provide the type of the object inside array response
-    func request<T>(type: Array<T>.Type = Array<DontParse.self>) -> AnyPublisher<[T], APIError> where T: JSONContructible {
+    func request<T>(type: Array<T>.Type) -> AnyPublisher<[T], APIError> where T: JSONContructible {
         let request = try! self.asURLRequest()
         self.logRequest(request: request)
         let startDate = Date()
         return URLSession.DataTaskPublisher(request: request, session: .shared)
             .tryMap { data, response in
                 try self.handleTryMap(response: response, data: data, requestStartsAt: startDate)
-                let jsonArray = try data.toJsonArray()
+                let jsonArray: [JSON] = data.toJsonArray() ?? throw APIError.json
                 return try jsonArray.map { try T.init(json: $0) }
             }
             .mapError { error in return self.handleMapError(error: error) }
@@ -50,14 +50,14 @@ extension APIRoutes: Requestable {
     }
 
     /// Request the server and return an object. You need to provide the type of the object
-    func request<T>(type: T.Type = DontParse.self) -> AnyPublisher<T, APIError> where T: JSONContructible {
+    func request<T>(type: T.Type) -> AnyPublisher<T, APIError> where T: JSONContructible {
         let request = try! self.asURLRequest()
          logRequest(request: request)
          let startDate = Date()
          return URLSession.DataTaskPublisher(request: request, session: .shared)
              .tryMap { data, response in
                  try self.handleTryMap(response: response, data: data, requestStartsAt: startDate)
-                 let json: JSON = try data.toJson()
+                let json: JSON = data.toJson() ?? throw APIError.json
                  return try T.init(json: json)
              }
              .mapError { error in return self.handleMapError(error: error) }
@@ -84,7 +84,7 @@ extension APIRoutes: Requestable {
         return URLSession.DataTaskPublisher(request: urlRequest, session: .shared)
         .tryMap { data, response in
             try self.handleTryMap(response: response, data: data, requestStartsAt: startDate)
-            let json: JSON = try data.toJson()
+            let json: JSON = data.toJson() ?? throw APIError.json
             return try T.init(json: json)
         }
         .mapError { error in return self.handleMapError(error: error) }
@@ -98,9 +98,11 @@ extension APIRoutes {
     func checkErrors(response: URLResponse?, data: Data) throws {
         guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
             guard let json: JSON = try? data.toJson() else {
-                throw APIError.encodingFailed(response: response, data: data)
+                throw APIError.decodingFailed(response: response, data: data)
             }
-            if let statusCode = (response as? HTTPURLResponse)?.statusCode {
+            if let name: String = "name" <~~ json, let message: String = "message" <~~ json, let status: Int = "status" <~~ json {
+                throw APIError.fromServer(name, status, message)
+            } else if let statusCode = (response as? HTTPURLResponse)?.statusCode {
                 switch statusCode {
                 case 502:
                     throw APIError.badGateway
@@ -124,7 +126,7 @@ extension APIRoutes {
         if let error = error as? APIError {
             return error
         } else {
-            return APIError.custom("API_ERROR", 500, error.localizedDescription)
+            return APIError.custom(error: error)
         }
     }
 
@@ -135,7 +137,8 @@ extension APIRoutes {
     
     /// Log request. This is strongly recommendend to  set printData to false is data is big (ex: file...)
     func logRequest(request: URLRequest, printData: Bool = true) {
-        if Config.logRequestsMode == .all || Config.logRequestsMode == .requestOnly {
+        let mode = BBSwift.instance.options.logRequestMode
+        if mode == .all || mode == .requestOnly {
             var requestLog = """
             ⚡️⚡️ Request: \(request.httpMethod ?? "No HTTP method") \(request.url?.absoluteString ?? "No URL")
             ⚡️⚡️⚡️⚡️ Headers: \(request.allHTTPHeaderFields ?? ["": ""])
@@ -151,7 +154,8 @@ extension APIRoutes {
     }
 
     func logResponse(response: URLResponse?, data: Data?, requestStartsAt: Date) {
-        if Config.logRequestsMode == .all || Config.logRequestsMode == .responseOnly {
+        let mode = BBSwift.instance.options.logRequestMode
+        if mode == .all || mode == .responseOnly {
             if let response = response as? HTTPURLResponse {
                 let executionTime = Date().timeIntervalSince(requestStartsAt)
                 var responseLog = """
@@ -169,4 +173,3 @@ extension APIRoutes {
         }
     }
 }
-#endif

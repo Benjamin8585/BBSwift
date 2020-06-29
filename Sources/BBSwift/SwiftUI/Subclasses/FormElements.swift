@@ -6,7 +6,6 @@
 //
 
 import Foundation
-#if !os(macOS)
 import SwiftUI
 
 /// Create section - native style but with VStack
@@ -18,7 +17,7 @@ public struct FormSection<Content>: View where Content: View {
     var titleBottom: CGFloat
     var titleColor: Color
     
-    public init(title: String, padding: CGFloat = 15.0, titleBottom: CGFloat = 7.0, titleColor: Color = BBColor.text.grayMedium, @ViewBuilder content: () -> Content) {
+    public init(title: String, padding: CGFloat = 15.0, titleBottom: CGFloat = 7.0, titleColor: Color = BBColor.Text.grayMedium, @ViewBuilder content: () -> Content) {
         self.title = title
         self.padding = padding
         self.titleBottom = titleBottom
@@ -26,7 +25,7 @@ public struct FormSection<Content>: View where Content: View {
         self.content = content()
     }
     
-    var body: some View {
+    public var body: some View {
         VStack {
             HStack {
                 Text(self.title).font(.footnote).foregroundColor(self.titleColor)
@@ -56,11 +55,11 @@ public struct FormLine<Content>: View where Content: View {
         self.content = content()
     }
     
-    var body: some View {
+    public var body: some View {
         HStack {
             self.content
         }
-        .foregroundColor(Colors.Text.lightBlack)
+        .foregroundColor(BBColor.Text.lightBlack)
         .frame(minHeight: self.height)
         .padding(.leading, self.padding)
         .padding(.trailing, self.padding)
@@ -86,4 +85,3 @@ struct FormSection_Previews: PreviewProvider {
         }
     }
 }
-#endif
