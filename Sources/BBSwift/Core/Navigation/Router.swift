@@ -26,7 +26,7 @@ public class Router<Route: RoutingCompatible> {
 
     public let root: NavigationController
 
-    init(root: NavigationController) {
+    public init(root: NavigationController) {
         self.root = root
     }
 

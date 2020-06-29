@@ -39,7 +39,7 @@ public struct BBSwift {
     }
     
     /// Default configuration of the Framework
-    mutating func configure(options: BBOptions = BBOptions()) {
+    public mutating func configure(options: BBOptions = BBOptions()) {
         self.options = options
     }
     
