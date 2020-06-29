@@ -12,16 +12,30 @@ public enum LogRequestMode {
 }
 
 public struct BBPickerOptions {
-    public var title: String = "Pick an image"
-    public var message: String = "Choose where to pick an image"
-    public var camera: String = "from Camera"
-    public var library: String = "from Library"
+    
+    public var title: String
+    public var message: String
+    public var camera: String
+    public var library: String
+    
+    public init(title: String = "Pick an image", message: String = "Choose where to pick an image", camera: String = "from Camera", library: String = "from Library") {
+        self.title = title
+        self.message = message
+        self.camera = camera
+        self.library = library
+    }
 }
 
 
 public struct BBOptions {
-    var picker: BBPickerOptions = BBPickerOptions()
-    public var logRequestMode: LogRequestMode = .none
+    
+    public var picker: BBPickerOptions
+    public var logRequestMode: LogRequestMode
+    
+    public init(picker: BBPickerOptions = BBPickerOptions(), logRequestMode: LogRequestMode = .none) {
+        self.picker = picker
+        self.logRequestMode = logRequestMode
+    }
     
 }
 
@@ -34,12 +48,12 @@ public struct BBSwift {
     public var localizationLanguage: String?
     public var bundle: Bundle = Bundle.main
     
-    init(options: BBOptions = BBOptions()) {
+    public init(options: BBOptions = BBOptions()) {
         self.options = options
     }
     
     /// Default configuration of the Framework
-    public mutating func configure(options: BBOptions = BBOptions()) {
+    public mutating func configure(options: BBOptions) {
         self.options = options
     }
     
