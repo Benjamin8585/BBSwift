@@ -102,7 +102,7 @@ public enum APIError: Error, Equatable {
         return lhs.value == hrs.value
     }
 
-    var message: String {
+    public var message: String {
         switch self {
         case .custom(let error):
             return error.localizedDescription
