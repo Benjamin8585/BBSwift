@@ -22,7 +22,7 @@ public class NavigationController: UINavigationController {
     }
 }
 
-public class Router {
+public class Router<Route: RoutingCompatible> {
 
     public let root: NavigationController
 

@@ -11,7 +11,7 @@ import UIKit
 public extension CATransition {
 
     /// New viewController will appear from bottom of screen.
-    public func segueFromBottom(duration: Double = 0.375) -> CATransition {
+    func segueFromBottom(duration: Double = 0.375) -> CATransition {
         let transition = CATransition()
         transition.duration = duration //set the duration to whatever you'd like.
         transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
@@ -21,7 +21,7 @@ public extension CATransition {
     }
 
     /// New viewController will appear from top of screen.
-    public static func segueFromTop(duration: Double = 0.375) -> CATransition {
+    static func segueFromTop(duration: Double = 0.375) -> CATransition {
         let transition = CATransition()
         transition.duration = duration //set the duration to whatever you'd like.
         transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
@@ -30,7 +30,7 @@ public extension CATransition {
         return transition
     }
      /// New viewController will appear from left side of screen.
-    public static func segueFromLeft(duration: Double = 0.375) -> CATransition {
+    static func segueFromLeft(duration: Double = 0.375) -> CATransition {
         let transition = CATransition()
         transition.duration = duration //set the duration to whatever you'd like.
         transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
@@ -40,7 +40,7 @@ public extension CATransition {
     }
     
     /// New viewController will pop from right side of screen.
-    public static func popFromRight(duration: Double = 0.375) -> CATransition {
+    static func popFromRight(duration: Double = 0.375) -> CATransition {
         let transition = CATransition()
         transition.duration = duration //set the duration to whatever you'd like.
         transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
@@ -50,7 +50,7 @@ public extension CATransition {
     }
 
     /// New viewController will appear from left side of screen.
-    public static func popFromLeft(duration: Double = 0.375) -> CATransition {
+    static func popFromLeft(duration: Double = 0.375) -> CATransition {
         let transition = CATransition()
         transition.duration = duration //set the duration to whatever you'd like.
         transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)

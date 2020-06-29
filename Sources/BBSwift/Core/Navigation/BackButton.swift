@@ -23,9 +23,4 @@ struct BackButton: View {
             }.foregroundColor(color)
         }
     }
-
-    /// Return a default back button
-    static func `default`(title: String) -> BackButton {
-        return BackButton(title: title, action: { BBSwift.router.pop(animated: true )}, color: BBColor.Text.lightBlack)
-    }
 }

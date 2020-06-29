@@ -11,7 +11,7 @@ import UIKit
 public extension UIApplication {
     
     /// Close the current keyboard
-    public func endEditing() {
+    func endEditing() {
         sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
 }

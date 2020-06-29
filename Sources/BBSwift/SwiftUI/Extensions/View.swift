@@ -32,7 +32,7 @@ public extension View {
 public extension View {
 
     /// Get the current navigation controller
-    public var rootVC: UINavigationController? {
+    var rootVC: UINavigationController? {
         guard let scene = UIApplication.shared.connectedScenes.first,
             let sceneDelegate = scene as? UIWindowScene,
             let rootvc = sceneDelegate.windows.first?.rootViewController

@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import UIKit
 
-public protocol Route {
+public protocol RoutingCompatible {
     
     associatedtype RoutedView: View
     

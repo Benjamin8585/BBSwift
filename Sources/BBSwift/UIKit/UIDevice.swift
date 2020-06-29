@@ -74,7 +74,7 @@ public func != (lhs: DeviceSize, rhs: DeviceSize) -> Bool {
 public extension UIDevice {
 
     /// Next device type. You have to consider that this function could fail and return unknown with next devices so use with caution
-    public var deviceSpecificType: DeviceTypeSpecific {
+    var deviceSpecificType: DeviceTypeSpecific {
         let deviceName: DeviceTypeSpecific? = self.deviceNamesByCode[self.deviceCode]
 
         if let dev = deviceName {
@@ -94,7 +94,7 @@ public extension UIDevice {
     }
 
     /// General device type. You have to consider that this function could fail and return unknown with next devices so use with caution
-    public var deviceType: DeviceType {
+    var deviceType: DeviceType {
         switch self.deviceSpecificType {
         case .simulator32Bit, .simulator64Bit:
             return .simulator
@@ -131,33 +131,33 @@ public extension UIDevice {
         }
     }
 
-    public var size: DeviceSize {
+    var size: DeviceSize {
         return DeviceSize(width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
     }
 
-    public var isIpad: Bool {
+    var isIpad: Bool {
         return UIDevice.current.userInterfaceIdiom == .pad
     }
 
-    public var isRetina: Bool {
+    var isRetina: Bool {
         return UIScreen.main.scale >= 2.0
     }
-    public var isLandscapeRight: Bool {
+    var isLandscapeRight: Bool {
         return self.orientation == UIDeviceOrientation.landscapeRight
     }
-    public var isLandscapeLeft: Bool {
+    var isLandscapeLeft: Bool {
         return self.orientation == UIDeviceOrientation.landscapeLeft
     }
-    public var isLandscape: Bool {
+    var isLandscape: Bool {
         return isLandscapeLeft || isLandscapeRight
     }
-    public var isPortraitDefault: Bool {
+    var isPortraitDefault: Bool {
         return self.orientation == UIDeviceOrientation.portrait
     }
-    public var isPortraitReverse: Bool {
+    var isPortraitReverse: Bool {
         return self.orientation == UIDeviceOrientation.portraitUpsideDown
     }
-    public var isPortrait: Bool {
+    var isPortrait: Bool {
         return isPortraitReverse || isPortraitDefault
     }
 
@@ -174,7 +174,7 @@ public extension UIDevice {
     }
 
     /// To retrieve device name (the type)
-    public var deviceName: String {
+    var deviceName: String {
         var deviceName: String? = deviceNamesByCode[self.deviceCode]?.rawValue
         if let dev = deviceName {
             return dev
@@ -317,7 +317,7 @@ public extension UIDevice {
 public extension UIDevice {
 
     /// Check if low power mode enabled on device
-    public var isLowPowerMode: Bool {
+    var isLowPowerMode: Bool {
         return ProcessInfo.processInfo.isLowPowerModeEnabled
     }
 }

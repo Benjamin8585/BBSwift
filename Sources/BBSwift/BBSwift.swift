@@ -15,31 +15,29 @@ public struct BBPickerOptions {
 
 
 public struct BBOptions {
-    
     var picker: BBPickerOptions = BBPickerOptions()
-    
     public var logRequestMode: LogRequestMode = .none
     
 }
 
 public struct BBSwift {
     
-    static private(set) var instance: BBSwift = BBSwift(options: BBOptions())
+    static private(set) var instance: BBSwift = BBSwift()
     
     var options: BBOptions
-    var router: Router!
     
     public var localizationLanguage: String?
     public var bundle: Bundle = Bundle.main
+    
+    init(options: BBOptions = BBOptions()) {
+        self.options = options
+    }
     
     /// Default configuration of the Framework
     mutating func configure(options: BBOptions = BBOptions()) {
         self.options = options
     }
     
-    mutating func configureRouter(navigationController: NavigationController) {
-        self.router = Router(root: navigationController)
-    }
     /// If you want the localize function to override the default phone language
     public static func setLocalizationLanguage(lang: String) {
         BBSwift.instance.localizationLanguage = lang
@@ -50,5 +48,4 @@ public struct BBSwift {
         BBSwift.instance.bundle = bundle
     }
 }
-
 

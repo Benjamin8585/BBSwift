@@ -41,7 +41,7 @@ extension APIRoutes: Requestable {
         return URLSession.DataTaskPublisher(request: request, session: .shared)
             .tryMap { data, response in
                 try self.handleTryMap(response: response, data: data, requestStartsAt: startDate)
-                let jsonArray: [JSON] = data.toJsonArray() ?? throw APIError.json
+                guard let jsonArray: [JSON] = try data.toJsonArray() else { throw APIError.json }
                 return try jsonArray.map { try T.init(json: $0) }
             }
             .mapError { error in return self.handleMapError(error: error) }
@@ -57,7 +57,7 @@ extension APIRoutes: Requestable {
          return URLSession.DataTaskPublisher(request: request, session: .shared)
              .tryMap { data, response in
                  try self.handleTryMap(response: response, data: data, requestStartsAt: startDate)
-                let json: JSON = data.toJson() ?? throw APIError.json
+                 guard let json: JSON = try data.toJson() else { throw APIError.json }
                  return try T.init(json: json)
              }
              .mapError { error in return self.handleMapError(error: error) }
@@ -84,7 +84,7 @@ extension APIRoutes: Requestable {
         return URLSession.DataTaskPublisher(request: urlRequest, session: .shared)
         .tryMap { data, response in
             try self.handleTryMap(response: response, data: data, requestStartsAt: startDate)
-            let json: JSON = data.toJson() ?? throw APIError.json
+            guard let json: JSON = try data.toJson() else { throw APIError.json }
             return try T.init(json: json)
         }
         .mapError { error in return self.handleMapError(error: error) }
