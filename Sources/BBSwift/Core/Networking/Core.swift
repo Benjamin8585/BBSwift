@@ -41,9 +41,7 @@ public struct HTTPMethod: RawRepresentable, Equatable, Hashable {
 }
 
 public protocol Requestable {
-    @available(OSX 10.15, *)
     func request<T>(type: Array<T>.Type) -> AnyPublisher<[T], APIError> where T: JSONContructible
-    @available(OSX 10.15, *)
     func request<T>(type: T.Type) -> AnyPublisher<T, APIError> where T: JSONContructible
 }
 

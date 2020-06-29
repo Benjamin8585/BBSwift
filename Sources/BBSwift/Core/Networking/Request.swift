@@ -15,7 +15,7 @@ public extension APIRouteRequestable {
     // MARK: - URLRequestConvertible
     func asURLRequest() throws -> URLRequest {
         
-        var urlRequest = URLRequest(url: self.baseUrl.toUrl()!)
+        var urlRequest = URLRequest(url: (self.baseUrl + self.path).toUrl()!)
        // HTTP Method
         urlRequest.httpMethod = method.rawValue
         urlRequest.allHTTPHeaderFields = headers
@@ -66,7 +66,7 @@ public extension APIRouteRequestable {
     }
     
     func uploadFile<T>(type: T.Type, paramName: String, fileName: String, contentType: String, fileData: Data) -> AnyPublisher<T, APIError> where T: JSONContructible {
-        let url = self.baseUrl.toUrl()!
+        let url = (self.baseUrl + self.path).toUrl()!
         let boundary = UUID().uuidString
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = self.method.rawValue
