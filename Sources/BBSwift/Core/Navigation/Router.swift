@@ -88,6 +88,11 @@ public class Router<Route: RoutingCompatible> {
     public func dissmissCurrent(animated: Bool = true, completion: (() -> Void)? = {}) {
         self.root.dismiss(animated: animated, completion: completion)
     }
+    
+    /// Return a default back button
+    func backButton(title: String) -> BackButton {
+        return BackButton(title: title, action: { self.pop() }, color: BBColor.Text.lightBlack)
+    }
 
 }
 
