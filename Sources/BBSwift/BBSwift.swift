@@ -21,8 +21,8 @@ public struct BBSwift {
     }
     
     /// Default configuration of the Framework
-    public mutating func configure(options: BBOptions) {
-        self.options = options
+    public static func configure(options: BBOptions) {
+        BBSwift.instance.options = options
     }
     
     /// If you want the localize function to override the default phone language
