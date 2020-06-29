@@ -14,6 +14,13 @@ public struct PlaceholderOverlay: View {
     var text: String
     var isLoading: Bool
     var showPlaceholderCondition: Bool
+    
+    public init(image: String, text: String, isLoading: Bool, showPlaceholderCondition: Bool) {
+        self.image = image
+        self.text = text
+        self.isLoading = isLoading
+        self.showPlaceholderCondition = showPlaceholderCondition
+    }
 
     public var body: some View {
         ZStack {
@@ -43,6 +50,11 @@ public struct PlaceholderView: View {
 
     var image: String
     var text: String
+    
+    public init(image: String, text: String) {
+        self.image = image
+        self.text = text
+    }
 
     public var body: some View {
         VStack {

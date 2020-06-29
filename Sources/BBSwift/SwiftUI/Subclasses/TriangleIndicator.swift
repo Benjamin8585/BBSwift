@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-enum TriangleDirection {
+public enum TriangleDirection {
     case down, up, right, left
 }
 
@@ -19,14 +19,14 @@ public struct TriangleIndicator: View {
     var color: Color
     var direction: TriangleDirection
 
-    init(color: Color = Color.black, width: CGFloat = 12.0, height: CGFloat = 8.0, direction: TriangleDirection = .down) {
+    public init(color: Color = Color.black, width: CGFloat = 12.0, height: CGFloat = 8.0, direction: TriangleDirection = .down) {
         self.color = color
         self.direction = direction
         self.width = width
         self.height = height
     }
 
-    var degrees: Double {
+    public var degrees: Double {
         switch self.direction {
         case .down:
             return 0

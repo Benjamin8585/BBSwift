@@ -21,7 +21,7 @@ public struct GrowingTextView: View {
     let maxHeight: CGFloat
     
     /// Create a Growing text view. If no placeholder is provided the color is set to textColor. minHeight and maxheight are the min and max size of the textview
-    init(text: Binding<String>, placeholder: String, textColor: Color = BBColor.Text.lightBlack, placeholderColor: Color? = nil,  minHeight: CGFloat = 39.0, maxHeight: CGFloat = 150.0) {
+    public init(text: Binding<String>, placeholder: String, textColor: Color = BBColor.Text.lightBlack, placeholderColor: Color? = nil,  minHeight: CGFloat = 39.0, maxHeight: CGFloat = 150.0) {
         self._text = text
         self.placeholder = placeholder
         self.textColor = textColor
@@ -30,7 +30,7 @@ public struct GrowingTextView: View {
         self.maxHeight = maxHeight
     }
 
-    var countedHeight: CGFloat {
+    public var countedHeight: CGFloat {
         min(max(minHeight, contentHeight), maxHeight)
     }
 
@@ -49,7 +49,7 @@ public struct TextViewWrapper: UIViewRepresentable {
     @Binding var focused: Bool
     @Binding var contentHeight: CGFloat
 
-    init(placeholder: String, placeholderColor: Color, textColor: Color, text: Binding<String>, focused: Binding<Bool>, contentHeight: Binding<CGFloat>) {
+    public init(placeholder: String, placeholderColor: Color, textColor: Color, text: Binding<String>, focused: Binding<Bool>, contentHeight: Binding<CGFloat>) {
         self.placeholder = placeholder
         self.placeholderColor = placeholderColor.uiColor()
         self.textColor = textColor.uiColor()
@@ -72,11 +72,11 @@ public struct TextViewWrapper: UIViewRepresentable {
         Coordinator(text: $text, focused: $focused, contentHeight: $contentHeight)
     }
     
-    var placeholderVisible: Bool {
+    public var placeholderVisible: Bool {
         return self.text.emptyFiltered() == nil && !self.focused
     }
     
-    func getText() -> String {
+    public func getText() -> String {
         if placeholderVisible {
             return self.placeholder
         } else {
@@ -84,7 +84,7 @@ public struct TextViewWrapper: UIViewRepresentable {
         }
     }
     
-    func getColor() -> UIColor {
+    public func getColor() -> UIColor {
         if placeholderVisible {
             return self.placeholderColor
         } else {
@@ -103,7 +103,7 @@ public struct TextViewWrapper: UIViewRepresentable {
         @Binding private var focused: Bool
         @Binding private var contentHeight: CGFloat
 
-        init(text: Binding<String>, focused: Binding<Bool>, contentHeight: Binding<CGFloat>) {
+        public init(text: Binding<String>, focused: Binding<Bool>, contentHeight: Binding<CGFloat>) {
           self._text = text
           self._focused = focused
           self._contentHeight = contentHeight

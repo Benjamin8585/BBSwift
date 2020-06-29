@@ -14,6 +14,12 @@ public struct ProgressBar: View {
     
     var backgroundColor: Color
     var indicatorColor: Color
+    
+    public init(value: Binding<Float>, backgroundColor: Color, indicatorColor: Color) {
+        self._value = value
+        self.backgroundColor = backgroundColor
+        self.indicatorColor = indicatorColor
+    }
 
     public var body: some View {
         GeometryReader { geometry in
@@ -35,9 +41,15 @@ public struct InfiniteProgressBar: View {
 
     @State private var isAnimating: Bool = false
 
-    var indicatorWidth: CGFloat = 30.0
+    var indicatorWidth: CGFloat
     var backgroundColor: Color
     var indicatorColor: Color
+    
+    public init(indicatorWidth: CGFloat = 30.0, backgroundColor: Color, indicatorColor: Color) {
+        self.indicatorWidth = indicatorWidth
+        self.backgroundColor = backgroundColor
+        self.indicatorColor = indicatorColor
+    }
 
     public var body: some View {
         GeometryReader { geometry in

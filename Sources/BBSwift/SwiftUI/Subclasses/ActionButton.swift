@@ -17,7 +17,7 @@ public struct ActionButton: View {
     var bottom: CGFloat
     var top: CGFloat
     
-    init(isLoading: Binding<Bool>, buttonInfo: (color: Color, text: String, image: String?), height: CGFloat = 80.0, bottom: CGFloat = 0.0, top: CGFloat = 0.0) {
+    public init(isLoading: Binding<Bool>, buttonInfo: (color: Color, text: String, image: String?), height: CGFloat = 80.0, bottom: CGFloat = 0.0, top: CGFloat = 0.0) {
         self._isLoading = isLoading
         self.buttonInfo = buttonInfo
         self.height = height
