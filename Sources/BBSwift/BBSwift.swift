@@ -7,38 +7,6 @@
 import Foundation
 
 
-public enum LogRequestMode {
-    case all, requestOnly, responseOnly, none
-}
-
-public struct BBPickerOptions {
-    
-    public var title: String
-    public var message: String
-    public var camera: String
-    public var library: String
-    
-    public init(title: String = "Pick an image", message: String = "Choose where to pick an image", camera: String = "from Camera", library: String = "from Library") {
-        self.title = title
-        self.message = message
-        self.camera = camera
-        self.library = library
-    }
-}
-
-
-public struct BBOptions {
-    
-    public var picker: BBPickerOptions
-    public var logRequestMode: LogRequestMode
-    
-    public init(picker: BBPickerOptions = BBPickerOptions(), logRequestMode: LogRequestMode = .none) {
-        self.picker = picker
-        self.logRequestMode = logRequestMode
-    }
-    
-}
-
 public struct BBSwift {
     
     static private(set) var instance: BBSwift = BBSwift()

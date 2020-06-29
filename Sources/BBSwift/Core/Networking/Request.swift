@@ -10,7 +10,7 @@ import Combine
 import SwiftUI
 import Gloss
 
-extension APIRoutes: URLRequestConvertible {
+public extension APIRouteRequestable {
     
     // MARK: - URLRequestConvertible
     func asURLRequest() throws -> URLRequest {
@@ -31,7 +31,7 @@ extension APIRoutes: URLRequestConvertible {
     }
 }
 
-extension APIRoutes: Requestable {
+public extension APIRouteRequestable {
     
     /// Request the server and return array of objects. You need to provide the type of the object inside array response
     func request<T>(type: Array<T>.Type) -> AnyPublisher<[T], APIError> where T: JSONContructible {
@@ -93,7 +93,7 @@ extension APIRoutes: Requestable {
     }
 }
 
-extension APIRoutes {
+public extension APIRouteRequestable {
 
     func checkErrors(response: URLResponse?, data: Data) throws {
         guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {

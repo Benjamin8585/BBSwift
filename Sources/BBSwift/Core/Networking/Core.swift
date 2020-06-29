@@ -48,7 +48,7 @@ public protocol Requestable {
 }
 
 public protocol APIRouteAssociable {
-    static func getAssociatedRoute() -> APIRoute
+    static func getAssociatedRoute() -> APIRouteRequestable
 }
 
 public protocol URLRequestConvertible {
@@ -65,6 +65,7 @@ public enum APIError: Error, Equatable {
     case fromServer(String, Int, String)
     case custom(error: Error)
     case json
+    case parsingFailed(object: String, property: String?)
     
     var value: Int {
         switch self {
@@ -78,6 +79,8 @@ public enum APIError: Error, Equatable {
             return 3
         case .json:
             return 4
+        case .parsingFailed:
+            return 5
         case .tokenExpired:
             return 401
         case .notFound:
@@ -97,6 +100,42 @@ public enum APIError: Error, Equatable {
     
     public static func ==(lhs: APIError, hrs: APIError) -> Bool {
         return lhs.value == hrs.value
+    }
+
+    var message: String {
+        switch self {
+        case .custom(let error):
+            return error.localizedDescription
+        case .fromServer( _, _, let message):
+            return message.unquoted()
+        case .tokenExpired:
+            return "apierror_tokenexpired".localized()
+        case .encodingFailed:
+            return "apierror_encodingfailed".localized()
+        case .json:
+            return "apierror_json".localized()
+        case .decodingFailed(_, _):
+            return "apierror_decodingfailed".localized()
+        case .parsingFailed(let object, let property):
+            if let prop = property {
+                return "apierror_parsingfailed_object_prop".localized(params: [prop, object])
+            } else {
+                return "apierror_parsingfailed_object".localized(params: [object])
+                
+            }
+        case .unexpected:
+            return "apierror_unexpected".localized()
+        case .badGateway:
+            return "apierror_badgateway".localized()
+        case .internalServerError:
+            return "apierror_internalservererror".localized()
+        case .notFound:
+            return "apierror_notfound".localized()
+        case .tooManyRequests:
+            return "apierror_toomanyrequests".localized()
+        case .networkCallCancelled:
+            return "apierror_networkcallcancelled".localized()
+        }
     }
     
 }

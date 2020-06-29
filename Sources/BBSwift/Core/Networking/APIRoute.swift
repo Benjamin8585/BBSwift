@@ -7,23 +7,7 @@
 
 import Foundation
 
-struct APIRoutes: APIRoute {
-    
-    var path: String = "OK"
-    
-    var method: HTTPMethod = .get
-    
-    var parameters: JSON? = nil
-    
-    var headers: [String : String] = [:]
-    
-    var baseUrl: String = "http://google.fr"
-    
-    
-}
-
-public protocol APIRoute {
-    
+public protocol APIRouteRequestable {
     var path: String { get }
     var method: HTTPMethod { get }
     var parameters: JSON? { get }
