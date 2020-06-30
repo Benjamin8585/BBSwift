@@ -48,7 +48,6 @@ public extension String {
 
     /// Return language name according to code provided.
     /// ex: fr return français.
-    @available(OSX 10.12, *)
     func languageName() -> String? {
         return NSLocale(localeIdentifier: self).localizedString(forLanguageCode: self) ?? NSLocale.current.localizedString(forLanguageCode: self)
     }
