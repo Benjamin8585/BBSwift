@@ -12,13 +12,19 @@ public struct BannerData {
     var title: String
     var detail: String
     var type: BannerType
+    
+    public init(title: String, detail: String, type: BannerType) {
+        self.title = title
+        self.detail = detail
+        self.type = type
+    }
 
-    static var empty: BannerData {
+    static public var empty: BannerData {
         BannerData(title: "", detail: "", type: .info)
     }
 }
 
-protocol BannerTypeRepresentable {
+public protocol BannerTypeRepresentable {
     
     var tintColor: Color { get }
 }

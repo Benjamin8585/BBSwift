@@ -12,7 +12,7 @@ import SwiftUI
 public final class KeyboardResponder: ObservableObject {
     
     private var notificationCenter: NotificationCenter
-    @Published private(set) var currentHeight: CGFloat = 0
+    @Published private(set) public var currentHeight: CGFloat = 0
     private var openOffset: CGFloat
 
     public init(center: NotificationCenter = .default, openOffset: CGFloat = 0) {
