@@ -10,7 +10,11 @@ import SwiftUI
 
 public struct ButtonActivityIndicator: View {
 
-    @State private var isAnimating: Bool = false
+    @State private var isAnimating: Bool
+    
+    public init() {
+        self.isAnimating = false
+    }
 
     public var body: some View {
 

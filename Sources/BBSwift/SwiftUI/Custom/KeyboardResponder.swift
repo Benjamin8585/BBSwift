@@ -15,7 +15,7 @@ public final class KeyboardResponder: ObservableObject {
     @Published private(set) var currentHeight: CGFloat = 0
     private var openOffset: CGFloat
 
-    init(center: NotificationCenter = .default, openOffset: CGFloat = 0) {
+    public init(center: NotificationCenter = .default, openOffset: CGFloat = 0) {
         self.openOffset = openOffset
         notificationCenter = center
         notificationCenter.addObserver(self, selector: #selector(keyBoardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
