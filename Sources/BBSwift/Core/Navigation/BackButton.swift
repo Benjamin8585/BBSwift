@@ -9,13 +9,19 @@ import Foundation
 import SwiftUI
 
 
-struct BackButton: View {
+public struct BackButton: View {
 
-    var title: String
-    var action: () -> Void
-    var color: Color
+    public var title: String
+    public var action: () -> Void
+    public var color: Color
+    
+    public init(title: String, action: @escaping () -> Void, color: Color) {
+        self.title = title
+        self.action = action
+        self.color = color
+    }
 
-    var body: some View {
+    public var body: some View {
         Button(action: action) {
             HStack {
                 Image(systemName: "arrow.left.circle")
