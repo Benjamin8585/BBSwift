@@ -47,19 +47,23 @@ public struct PlaceholderOverlay: View {
 }
 
 public struct PlaceholderView: View {
+    
+    @Environment(\.colorScheme) var scheme: ColorScheme
 
     var image: String
     var text: String
+    var foregoundColor: Color?
     
-    public init(image: String, text: String) {
+    public init(image: String, text: String, foregroundColor: Color? = nil) {
         self.image = image
         self.text = text
+        self.foregoundColor = foregroundColor
     }
 
     public var body: some View {
         VStack {
             Image(self.image).resizable().frame(width: 100, height: 100).padding(.bottom, 20.0)
-            Text(self.text).foregroundColor(getBBColor(BBColor.Text.main)).font(.headline).bold()
+            Text(self.text).foregroundColor(self.foregoundColor ?? BBColor.Text.main.getColor(scheme: scheme)).font(.headline).bold()
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
             .offset(x: 0, y: -60).background(Color.white)
     }

@@ -11,13 +11,13 @@ import SwiftUI
 public struct Colorable {
     var lightMode: Color
     var darkMode: Color
-}
-
-public func getBBColor(_ colorable: Colorable) -> Color {
-    if let scheme = BBSwift.instance.options.colorScheme {
-        return scheme == .light ? colorable.lightMode : colorable.darkMode
-    } else {
-        return colorable.lightMode
+    
+    func getColor(scheme: ColorScheme? = nil) -> Color {
+        if let scheme = scheme {
+            return scheme == .light ? self.lightMode : self.darkMode
+        } else {
+            return self.lightMode
+        }
     }
 }
 
@@ -26,6 +26,10 @@ public struct BBColor {
         public static var form: Colorable = Colorable(
             lightMode: Color(red: 241/255.0, green: 241/255.0, blue: 248/255.0),
             darkMode: Color(red: 60/255.0, green: 60/255.0, blue: 60/255.0)
+        )
+        public static var formLine: Colorable = Colorable(
+            lightMode: Color(red: 255/255.0, green: 255/255.0, blue: 255/255.0),
+            darkMode: Color(red: 80/255.0, green: 80/255.0, blue: 80/255.0)
         )
         public static var formSection: Colorable = Colorable(
             lightMode: Color(red: 220/255.0, green: 220/255.0, blue: 220/255.0),
@@ -37,6 +41,11 @@ public struct BBColor {
             lightMode: Color(red: 32/255.0, green: 31/255.0, blue: 24/255.0),
             darkMode: Color(red: 245/255.0, green: 245/255.0, blue: 247/255.0)
         )
+        public static var sectionTitleColor: Colorable = Colorable(
+            lightMode: Color(red: 120/255.0, green: 120/255.0, blue: 120/255.0),
+            darkMode: Color(red: 220/255.0, green: 220/255.0, blue: 220/255.0)
+        )
+        
         public static var grayMedium = Color(red: 120/255.0, green: 120/255.0, blue: 120/255.0)
         
     }

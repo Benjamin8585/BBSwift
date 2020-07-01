@@ -23,6 +23,8 @@ public class NavigationController: UINavigationController {
 }
 
 public class Router<Route: RoutingCompatible> {
+    
+    @Environment(\.colorScheme) var scheme: ColorScheme
 
     public let root: NavigationController
 
@@ -91,7 +93,7 @@ public class Router<Route: RoutingCompatible> {
     
     /// Return a default back button
     public func backButton(title: String) -> BackButton {
-        return BackButton(title: title, action: { self.pop() }, color: getBBColor(BBColor.Text.main))
+        return BackButton(title: title, action: { self.pop() }, color: BBColor.Text.main.getColor(scheme: scheme))
     }
 
 }

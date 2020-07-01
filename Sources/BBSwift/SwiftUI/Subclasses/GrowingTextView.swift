@@ -9,23 +9,25 @@ import Foundation
 import SwiftUI
 
 public struct GrowingTextView: View {
+    
+    @Environment(\.colorScheme) var scheme: ColorScheme
 
     @Binding var text: String
     @State var focused: Bool = false
     @State var contentHeight: CGFloat = 0
 
     let placeholder: String
-    let placeholderColor: Color
-    let textColor: Color
+    let placeholderColor: Color?
+    let textColor: Color?
     let minHeight: CGFloat
     let maxHeight: CGFloat
     
     /// Create a Growing text view. If no placeholder is provided the color is set to textColor. minHeight and maxheight are the min and max size of the textview
-    public init(text: Binding<String>, placeholder: String, textColor: Color = getBBColor(BBColor.Text.main), placeholderColor: Color? = nil,  minHeight: CGFloat = 39.0, maxHeight: CGFloat = 150.0) {
+    public init(text: Binding<String>, placeholder: String, textColor: Color? = nil, placeholderColor: Color? = nil,  minHeight: CGFloat = 39.0, maxHeight: CGFloat = 150.0) {
         self._text = text
         self.placeholder = placeholder
         self.textColor = textColor
-        self.placeholderColor = placeholderColor ?? textColor
+        self.placeholderColor = placeholderColor
         self.minHeight = minHeight
         self.maxHeight = maxHeight
     }
@@ -35,7 +37,7 @@ public struct GrowingTextView: View {
     }
 
     public var body: some View {
-        TextViewWrapper(placeholder: self.placeholder, placeholderColor: placeholderColor, textColor: textColor, text: $text, focused: $focused, contentHeight: $contentHeight).frame(height: countedHeight).padding(.leading, 5.0)
+        TextViewWrapper(placeholder: self.placeholder, placeholderColor: placeholderColor ?? BBColor.Text.main.getColor(scheme: scheme), textColor: textColor ?? BBColor.Text.main.getColor(scheme: scheme), text: $text, focused: $focused, contentHeight: $contentHeight).frame(height: countedHeight).padding(.leading, 5.0)
     }
 }
 

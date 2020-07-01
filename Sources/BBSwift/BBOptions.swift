@@ -42,13 +42,11 @@ public struct BBOptions {
     public var picker: BBPickerOptions
     public var banner: BBBannerOptions
     public var logRequestMode: LogRequestMode
-    public var colorScheme: ColorScheme?
     
-    public init(picker: BBPickerOptions = BBPickerOptions(), logRequestMode: LogRequestMode = .none, banner: BBBannerOptions = BBBannerOptions(), colorScheme: ColorScheme? = nil) {
+    public init(picker: BBPickerOptions = BBPickerOptions(), logRequestMode: LogRequestMode = .none, banner: BBBannerOptions = BBBannerOptions()) {
         self.picker = picker
         self.logRequestMode = logRequestMode
         self.banner = banner
-        self.colorScheme = colorScheme
     }
     
 }
