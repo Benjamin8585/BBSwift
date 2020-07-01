@@ -59,7 +59,7 @@ public struct FormLine<Content>: View where Content: View {
         HStack {
             self.content
         }
-        .foregroundColor(BBColor.Text.lightBlack)
+        .foregroundColor(getBBColor(BBColor.Text.main))
         .frame(minHeight: self.height)
         .padding(.leading, self.padding)
         .padding(.trailing, self.padding)
@@ -81,7 +81,7 @@ struct FormSection_Previews: PreviewProvider {
             }
             .padding(.top, 15)
             .padding(.bottom, 15)
-            .background(BBColor.Background.form)
+            .background(getBBColor(BBColor.Background.form))
         }
     }
 }

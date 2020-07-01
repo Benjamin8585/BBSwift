@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 public enum LogRequestMode {
     case all, requestOnly, responseOnly, none
@@ -41,11 +42,13 @@ public struct BBOptions {
     public var picker: BBPickerOptions
     public var banner: BBBannerOptions
     public var logRequestMode: LogRequestMode
+    public var colorScheme: ColorScheme?
     
-    public init(picker: BBPickerOptions = BBPickerOptions(), logRequestMode: LogRequestMode = .none, banner: BBBannerOptions = BBBannerOptions()) {
+    public init(picker: BBPickerOptions = BBPickerOptions(), logRequestMode: LogRequestMode = .none, banner: BBBannerOptions = BBBannerOptions(), colorScheme: ColorScheme? = nil) {
         self.picker = picker
         self.logRequestMode = logRequestMode
         self.banner = banner
+        self.colorScheme = colorScheme
     }
     
 }

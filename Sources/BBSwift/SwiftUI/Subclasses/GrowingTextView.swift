@@ -21,7 +21,7 @@ public struct GrowingTextView: View {
     let maxHeight: CGFloat
     
     /// Create a Growing text view. If no placeholder is provided the color is set to textColor. minHeight and maxheight are the min and max size of the textview
-    public init(text: Binding<String>, placeholder: String, textColor: Color = BBColor.Text.lightBlack, placeholderColor: Color? = nil,  minHeight: CGFloat = 39.0, maxHeight: CGFloat = 150.0) {
+    public init(text: Binding<String>, placeholder: String, textColor: Color = getBBColor(BBColor.Text.main), placeholderColor: Color? = nil,  minHeight: CGFloat = 39.0, maxHeight: CGFloat = 150.0) {
         self._text = text
         self.placeholder = placeholder
         self.textColor = textColor

@@ -59,7 +59,7 @@ public struct PlaceholderView: View {
     public var body: some View {
         VStack {
             Image(self.image).resizable().frame(width: 100, height: 100).padding(.bottom, 20.0)
-            Text(self.text).foregroundColor(BBColor.Text.lightBlack).font(.headline).bold()
+            Text(self.text).foregroundColor(getBBColor(BBColor.Text.main)).font(.headline).bold()
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
             .offset(x: 0, y: -60).background(Color.white)
     }
