@@ -94,29 +94,35 @@ public extension APIRouteRequestable {
 }
 
 public extension APIRouteRequestable {
+    
+    private func errorForResponse(response: URLResponse?, data: Data) -> APIError {
+        if let statusCode = (response as? HTTPURLResponse)?.statusCode {
+            switch statusCode {
+            case 502:
+                return APIError.badGateway
+            case 500:
+                return APIError.internalServerError
+            case 404:
+                return APIError.notFound
+            case 429:
+                return APIError.tooManyRequests
+            default:
+                return APIError.decodingFailed(response: response, data: data)
+            }
+        } else {
+            return APIError.unexpected
+        }
+    }
 
     func checkErrors(response: URLResponse?, data: Data) throws {
         guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
             guard let json: JSON = try? data.toJson() else {
-                throw APIError.decodingFailed(response: response, data: data)
+                throw self.errorForResponse(response: response, data: data)
             }
             if let name: String = "name" <~~ json, let message: String = "message" <~~ json, let status: Int = "status" <~~ json {
                 throw APIError.fromServer(name, status, message)
-            } else if let statusCode = (response as? HTTPURLResponse)?.statusCode {
-                switch statusCode {
-                case 502:
-                    throw APIError.badGateway
-                case 500:
-                    throw APIError.internalServerError
-                case 404:
-                    throw APIError.notFound
-                case 429:
-                    throw APIError.tooManyRequests
-                default:
-                    throw APIError.unexpected
-                }
             } else {
-                throw APIError.unexpected
+                throw self.errorForResponse(response: response, data: data)
             }
         }
 
