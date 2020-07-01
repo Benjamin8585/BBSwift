@@ -26,6 +26,6 @@ let package = Package(
         ]),
         .testTarget(
             name: "BBSwiftTests",
-            dependencies: ["BBSwift"]),
+            dependencies: ["BBSwift", "Introspect", "Gloss"]),
     ]
 )

@@ -10,12 +10,14 @@ import SwiftUI
 
 
 public struct BackButton: View {
+    
+    @Environment(\.colorScheme) var scheme: ColorScheme
 
     public var title: String
     public var action: () -> Void
-    public var color: Color
+    public var color: Color?
     
-    public init(title: String, action: @escaping () -> Void, color: Color) {
+    public init(title: String, action: @escaping () -> Void, color: Color?) {
         self.title = title
         self.action = action
         self.color = color
@@ -26,7 +28,7 @@ public struct BackButton: View {
             HStack {
                 Image(systemName: "arrow.left.circle")
                 Text(self.title)
-            }.foregroundColor(color)
+            }.foregroundColor(color ?? BBColor.Text.main.getColor(scheme: scheme))
         }
     }
 }
