@@ -64,7 +64,7 @@ public struct PlaceholderView: View {
 
     public var body: some View {
         VStack {
-            Image(self.image).resizable().frame(width: 100, height: 100).padding(.bottom, 20.0)
+            Image(self.image).resizable().aspectRatio(contentMode: .fill).frame(width: 100, height: 100).padding(.bottom, 20.0)
             Text(self.text).foregroundColor(self.foregoundColor ?? BBColor.Text.main.getColor(scheme: scheme)).font(.headline).bold()
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
             .offset(x: 0, y: -60)
