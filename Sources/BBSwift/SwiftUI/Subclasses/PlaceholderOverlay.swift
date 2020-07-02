@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 public struct PlaceholderOverlay: View {
+    
+    @Environment(\.colorScheme) var scheme: ColorScheme
 
     var image: String
     var text: String
@@ -28,7 +30,7 @@ public struct PlaceholderOverlay: View {
                 if !isLoading && !showPlaceholderCondition {
                     EmptyView()
                 } else {
-                    Color.white.opacity(!isLoading && !showPlaceholderCondition ? 0 : 1)
+                    BBColor.Background.blackOrWhite.getColor().opacity(!isLoading && !showPlaceholderCondition ? 0 : 1)
                     ZStack {
                         PlaceholderView(image: self.image, text: self.text)
                             .opacity(!isLoading && showPlaceholderCondition ? 1 : 0)

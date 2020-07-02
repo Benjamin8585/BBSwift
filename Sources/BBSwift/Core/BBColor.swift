@@ -35,6 +35,10 @@ public struct BBColor {
             lightMode: Color(red: 220/255.0, green: 220/255.0, blue: 220/255.0),
             darkMode: Color(red: 80/255.0, green: 80/255.0, blue: 80/255.0)
         )
+        public static var blackOrWhite: Colorable = Colorable(
+            lightMode: Color(red: 255/255.0, green: 255/255.0, blue: 255/255.0),
+            darkMode: Color(red: 0/255.0, green: 0/255.0, blue: 0/255.0)
+        )
     }
     public struct Text {
         public static var main: Colorable = Colorable(
