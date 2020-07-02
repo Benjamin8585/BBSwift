@@ -11,11 +11,11 @@ import SwiftUI
 public struct CustomList<Content>: View where Content: View {
     
     private let content: Content
-    @Binding var objects: [Any]
+    var objects: [Any]
     
-    public init(objects: Binding<[Any]>, @ViewBuilder content: () -> Content) {
+    public init(objects: [Any], @ViewBuilder content: () -> Content) {
         self.content = content()
-        self._objects = objects
+        self.objects = objects
     }
     
     public var body: some View {
@@ -41,7 +41,7 @@ struct CustomListWrapper: View {
     @State var objects: [Any] = ["Ok", "Ok"]
     
     var body: some View {
-        CustomList(objects: $objects) {
+        CustomList(objects: objects) {
             Text("Ceci est un test")
         }
     }
