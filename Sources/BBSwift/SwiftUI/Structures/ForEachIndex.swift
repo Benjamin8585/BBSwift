@@ -36,7 +36,7 @@ public struct ForEachIndex<Data: RandomAccessCollection, ID: Hashable, Content: 
 }
 
 public extension ForEachIndex where ID == Data.Element.ID, Content: View, Data.Element: Identifiable {
-    init(_ data: Data, @ViewBuilder content: @escaping (_ index: Data.Index, _ element: Data.Element) -> Content) {
+    public init(_ data: Data, @ViewBuilder content: @escaping (_ index: Data.Index, _ element: Data.Element) -> Content) {
         self.init(data, id: \.id, content: content)
     }
 }

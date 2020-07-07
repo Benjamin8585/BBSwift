@@ -12,7 +12,7 @@ public struct IfLet<T, Out: View>: View {
     let value: T?
     let produce: (T) -> Out
 
-    init(_ value: T?, produce: @escaping (T) -> Out) {
+    public init(_ value: T?, produce: @escaping (T) -> Out) {
         self.value = value
         self.produce = produce
     }
