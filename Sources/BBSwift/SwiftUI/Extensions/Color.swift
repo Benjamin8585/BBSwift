@@ -9,11 +9,17 @@ import SwiftUI
 import UIKit
 
 /// Trasnform Color to UIColor
-extension Color {
+public extension Color {
 
     func uiColor() -> UIColor {
         let components = self.components()
         return UIColor(red: components.r, green: components.g, blue: components.b, alpha: components.a)
+    }
+    
+    static func random() -> Color {
+        return Color(red: .random(in: 0...1),
+                       green: .random(in: 0...1),
+                       blue: .random(in: 0...1))
     }
 
     private func components() -> (r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat) {
