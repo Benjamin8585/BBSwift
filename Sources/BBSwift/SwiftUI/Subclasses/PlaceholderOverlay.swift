@@ -16,12 +16,14 @@ public struct PlaceholderOverlay: View {
     var text: String
     var isLoading: Bool
     var showPlaceholderCondition: Bool
+    var backgroundColor: Color
     
-    public init(image: String, text: String, isLoading: Bool, showPlaceholderCondition: Bool) {
+    public init(image: String, text: String, isLoading: Bool, showPlaceholderCondition: Bool, backgroundColor: Color?) {
         self.image = image
         self.text = text
         self.isLoading = isLoading
         self.showPlaceholderCondition = showPlaceholderCondition
+        self.backgroundColor = backgroundColor ?? BBColor.Background.blackOrWhite.getColor(scheme: scheme)
     }
 
     public var body: some View {
@@ -30,7 +32,7 @@ public struct PlaceholderOverlay: View {
                 if !isLoading && !showPlaceholderCondition {
                     EmptyView()
                 } else {
-                    BBColor.Background.blackOrWhite.getColor(scheme: scheme).opacity(!isLoading && !showPlaceholderCondition ? 0 : 1)
+                    self.backgroundColor.opacity(!isLoading && !showPlaceholderCondition ? 0 : 1)
                     ZStack {
                         PlaceholderView(image: self.image, text: self.text)
                             .opacity(!isLoading && showPlaceholderCondition ? 1 : 0)
