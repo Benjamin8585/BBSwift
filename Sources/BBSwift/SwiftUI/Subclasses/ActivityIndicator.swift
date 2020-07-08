@@ -32,6 +32,9 @@ public struct ActivityIndicator: UIViewRepresentable {
     }
 
     public func updateUIView(_ uiView: UIActivityIndicatorView, context: UIViewRepresentableContext<ActivityIndicator>) {
+        if let color = color {
+            uiView.color = color.uiColor()
+        }
         isAnimating ? uiView.startAnimating() : uiView.stopAnimating()
     }
 }
