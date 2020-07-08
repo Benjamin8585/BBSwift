@@ -19,13 +19,16 @@ If you want to specify explictely a language (ex: user has English phone but cho
 
 ##### Examples
 
-*Localizable.string: (en version)*
+**Localizable.string: (en version)**
+
 `"boutiquerow_stocks" = "%@ stocks available";`
 
-*Localizable.string: (fr version)*
+**Localizable.string: (fr version)**
+
 `"boutiquerow_stocks" = "%@ stocks disponibles";`
 
-*Code*:
+**Code**
+
 `"boutiquerow_stocks".localized(params: ["3"])` will return  `3 stocks available`
 
 `BBSwift.setLocalizationLanguage(lang: "fr")`
