@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Date {
+public extension Date {
 
     static func random(daysBack: Int) -> Date {
         let day = arc4random_uniform(UInt32(daysBack)) + 1

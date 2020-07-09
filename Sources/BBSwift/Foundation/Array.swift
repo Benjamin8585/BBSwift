@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TwoDimension<T>: Identifiable {
+public struct TwoDimension<T>: Identifiable {
 
     var id: UUID
     var elem1: T
@@ -20,7 +20,7 @@ struct TwoDimension<T>: Identifiable {
     }
 }
 
-extension Array {
+public extension Array {
     func twoDimentions() -> [TwoDimension<Element>] {
         var odds: [Element] = []
         var even: [Element] = []

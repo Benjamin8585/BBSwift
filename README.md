@@ -33,3 +33,26 @@ If you want to specify explictely a language (ex: user has English phone but cho
 
 `BBSwift.setLocalizationLanguage(lang: "fr")`
 `"boutiquerow_stocks".localized(params: ["3"])` will return  `3 stocks disponibles`
+
+
+### Image picker
+
+You can transform any view as a button for image selection with `.imagePickable(image: $viewModel.image)`
+The image binding you are passing is where the image result will be stored.
+
+#### Customization
+
+By default the picker use these texts for popup:
+ - "Pick an image"
+ - "Choose where to pick an image"
+ - "from Camera"
+ - "from Library"
+
+You can customize these texts with `BBPickerOptions`.
+
+Here is an example when I want to use my own texts with localization:
+```
+var options = BBOptions(logRequestMode: .all)
+options.picker = BBPickerOptions(title: "imagepicker_title".localized(), message: "imagepicker_message".localized(), camera: "imagepicker_camera".localized(), library: "imagepicker_library".localized())
+BBSwift.configure(options: options)
+```
