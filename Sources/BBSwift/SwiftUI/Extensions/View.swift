@@ -11,6 +11,11 @@ import SwiftUI
 /// MARK: Modifiers
 
 public extension View {
+     /// Returns a type-erased version of the view.
+    var typeErased: AnyView { AnyView(self) }
+}
+
+public extension View {
     
     /// Add a banner to the view
     func banner(data: Binding<BannerData>, show: Binding<Bool>) -> some View {

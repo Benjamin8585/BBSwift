@@ -8,10 +8,10 @@
 import Foundation
 import Combine
 
-class ViewModelList<T: JSONContructible & ObservableObject>: ObservableObject where T: APIRouteAssociable {
+public class ViewModelList<T: JSONContructible & ObservableObject>: ObservableObject where T: APIRouteAssociable {
 
-    @Published var isLoading: Bool = false
-    @Published var objects: [T] = [] {
+    @Published public var isLoading: Bool = false
+    @Published public var objects: [T] = [] {
         didSet {
             self.cancellables.removeAll()
             self.objects.forEach { (object) in
@@ -22,14 +22,14 @@ class ViewModelList<T: JSONContructible & ObservableObject>: ObservableObject wh
             }
         }
     }
-    @Published var showBanner: Bool = false
-    @Published var bannerData: BannerData = BannerData.empty
+    @Published public var showBanner: Bool = false
+    @Published public var bannerData: BannerData = BannerData.empty
 
-    var cancellables = [AnyCancellable]()
+    public var cancellables = [AnyCancellable]()
 
-    var subscriber: AnyCancellable?
+    public var subscriber: AnyCancellable?
 
-    init(objects: [T] = []) {
+    public init(objects: [T] = []) {
         self.objects = objects
     }
     
@@ -57,11 +57,11 @@ class ViewModelList<T: JSONContructible & ObservableObject>: ObservableObject wh
         }
     }
     
-    func reloadObjects() {
+    public func reloadObjects() {
         self.load(showLoader: false, showError: false, compl: nil)
     }
 
-    func loadObjects(compl: ((APIError?) -> Void)? = nil) {
+    public func loadObjects(compl: ((APIError?) -> Void)? = nil) {
         self.load(showLoader: true, showError: true, compl: compl)
     }
 
