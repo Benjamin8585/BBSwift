@@ -9,11 +9,11 @@ import Foundation
 
 public struct TwoDimension<T>: Identifiable {
 
-    var id: UUID
-    var elem1: T
-    var elem2: T
+    public var id: UUID
+    public var elem1: T
+    public var elem2: T
 
-    init(elem1: T, elem2: T) {
+    public init(elem1: T, elem2: T) {
         self.id = UUID()
         self.elem1 = elem1
         self.elem2 = elem2
