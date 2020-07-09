@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-public class ViewModelList<T: JSONContructible & ObservableObject>: ObservableObject where T: APIRouteAssociable {
+open class ViewModelList<T: JSONContructible & ObservableObject>: ObservableObject where T: APIRouteAssociable {
 
     @Published public var isLoading: Bool = false
     @Published public var objects: [T] = [] {
