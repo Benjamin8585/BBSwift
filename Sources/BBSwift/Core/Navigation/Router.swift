@@ -115,7 +115,7 @@ public extension Router {
 
     /// Present the route modally
     func showModal(route: Route, style: UIModalPresentationStyle = .automatic, animated: Bool = true, completion: (() -> Void)? = {}) {
-        let hosting = UIHostingController(rootView: route.associatedView() as! AnyView)
+        let hosting = UIHostingController(rootView: route.associatedView())
         hosting.modalPresentationStyle = style
         let nav = UINavigationController(rootViewController: hosting)
         self.root.present(nav, animated: animated, completion: completion)
