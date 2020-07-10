@@ -63,4 +63,12 @@ public extension UIColor {
             return String(format: "%02lX%02lX%02lX", lroundf(r * 255), lroundf(g * 255), lroundf(b * 255))
         }
     }
+    
+    static func random(randomAlpha: Bool = false) -> UIColor {
+        let redValue = CGFloat(arc4random_uniform(255)) / 255.0
+        let greenValue = CGFloat(arc4random_uniform(255)) / 255.0
+        let blueValue = CGFloat(arc4random_uniform(255)) / 255.0
+        let alphaValue = randomAlpha ? CGFloat(arc4random_uniform(255)) / 255.0 : 1
+        return UIColor(red: redValue, green: greenValue, blue: blueValue, alpha: alphaValue)
+    }
 }
