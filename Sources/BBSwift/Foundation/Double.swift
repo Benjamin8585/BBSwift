@@ -33,4 +33,12 @@ public extension Double {
     func priceFormatted() -> String {
         return String(format: "%.02f", self.rounded(toPlaces: 2))
     }
+    
+    func removeZeros() -> String {
+         let formatter = NumberFormatter()
+         let number = NSNumber(value: self)
+         formatter.minimumFractionDigits = 0
+         formatter.maximumFractionDigits = 16 //maximum digits in Double after dot (maximum precision)
+         return String(formatter.string(from: number) ?? "")
+     }
 }
