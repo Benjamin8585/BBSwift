@@ -91,7 +91,7 @@ public extension String {
 
     
     func aesDecrypt(key: String, iv: String) throws -> String {
-        guard let data = Data(base64Encoded: value, options: .ignoreUnknownCharacters) else {
+        guard let data = Data(base64Encoded: self, options: .ignoreUnknownCharacters) else {
             throw BBSwiftError.base64Invalid
         }
         let dec = try AES(key: key, iv: iv, padding: .pkcs7).decrypt(data.bytes)
