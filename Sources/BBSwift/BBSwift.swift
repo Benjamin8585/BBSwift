@@ -36,3 +36,6 @@ public struct BBSwift {
     }
 }
 
+public enum BBSwiftError: Error {
+    case base64Invalid
+}
