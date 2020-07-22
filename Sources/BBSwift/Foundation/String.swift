@@ -91,12 +91,15 @@ public extension String {
 
     
     func aesDecrypt(key: String, iv: String) throws -> String {
-        let dec = try AES(key: key, iv: iv, padding: .pkcs7).decrypt(Array(self.utf8))
-        let encodedString = Data(bytes: dec, count: Int(dec.count)).base64EncodedString(options: .lineLength64Characters)
-        guard let data = Data(base64Encoded: encodedString, options: .ignoreUnknownCharacters), let str = String(data: data, encoding: .utf8) else {
+        guard let data = Data(base64Encoded: value, options: .ignoreUnknownCharacters) else {
             throw BBSwiftError.base64Invalid
         }
-        return str
+        let dec = try AES(key: key, iv: iv, padding: .pkcs7).decrypt(data.bytes)
+        let decData = Data(bytes: dec, count: Int(dec.count))
+        guard let result = String(data: decData, encoding: .utf8) else {
+            throw BBSwiftError.base64Invalid
+        }
+        return result
     }
     
     func fromBase64() -> String? {
