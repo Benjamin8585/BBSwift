@@ -25,6 +25,7 @@ public class NavigationController: UINavigationController {
 public class Router<Route: RoutingCompatible> {
 
     public let root: NavigationController
+    public var presentedModal: NavigationController?
 
     public init(root: NavigationController) {
         self.root = root
@@ -86,6 +87,7 @@ public class Router<Route: RoutingCompatible> {
 
     /// Dissmiss current modal
     public func dissmissCurrent(animated: Bool = true, completion: (() -> Void)? = {}) {
+        self.presentedModal = nil
         self.root.dismiss(animated: animated, completion: completion)
     }
     
@@ -117,7 +119,8 @@ public extension Router {
     func showModal(route: Route, style: UIModalPresentationStyle = .automatic, animated: Bool = true, completion: (() -> Void)? = {}) {
         let hosting = UIHostingController(rootView: route.associatedView())
         hosting.modalPresentationStyle = style
-        let nav = UINavigationController(rootViewController: hosting)
+        let nav = NavigationController(rootViewController: hosting)
+        self.presentedModal = nav
         self.root.present(nav, animated: animated, completion: completion)
     }
 
