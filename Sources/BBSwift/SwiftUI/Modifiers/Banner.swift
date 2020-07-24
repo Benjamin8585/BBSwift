@@ -107,10 +107,10 @@ struct BannerContentView: View {
     }
 }
 
-struct Banner_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            BannerContentView()
-        }
-    }
-}
+//struct Banner_Previews: PreviewProvider {
+//    static var previews: some View {
+//        VStack {
+//            BannerContentView()
+//        }
+//    }
+//}

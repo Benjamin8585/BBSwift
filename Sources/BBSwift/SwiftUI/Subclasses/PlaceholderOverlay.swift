@@ -73,11 +73,11 @@ public struct PlaceholderView: View {
     }
 }
 
-struct PlaceholderView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            PlaceholderView(image: "boutique", text: "Boutique list is empty")
-            PlaceholderOverlay(image: "boutique", text: "Boutique list is empty", isLoading: true, showPlaceholderCondition: true)
-        }
-    }
-}
+//struct PlaceholderView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Group {
+//            PlaceholderView(image: "boutique", text: "Boutique list is empty")
+//            PlaceholderOverlay(image: "boutique", text: "Boutique list is empty", isLoading: true, showPlaceholderCondition: true)
+//        }
+//    }
+//}

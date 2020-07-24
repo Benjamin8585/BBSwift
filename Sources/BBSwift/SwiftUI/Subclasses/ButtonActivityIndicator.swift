@@ -38,8 +38,8 @@ public struct ButtonActivityIndicator: View {
     }
 }
 
-struct ButtonActivityIndicator_Previews: PreviewProvider {
-    static var previews: some View {
-        ButtonActivityIndicator().frame(width: 25, height: 25)
-    }
-}
+//struct ButtonActivityIndicator_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ButtonActivityIndicator().frame(width: 25, height: 25)
+//    }
+//}

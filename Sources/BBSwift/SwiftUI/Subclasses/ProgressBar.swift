@@ -83,13 +83,13 @@ struct ProgressBarWrapper: View {
     
 }
 
-struct ProgressBar_Previews: PreviewProvider {
-    
-    static var previews: some View {
-        VStack {
-            ProgressBarWrapper()
-            InfiniteProgressBar(backgroundColor: Color.white, indicatorColor: BBColor.green).frame(height: 20)
-            Spacer()
-        }.padding()
-    }
-}
+//struct ProgressBar_Previews: PreviewProvider {
+//    
+//    static var previews: some View {
+//        VStack {
+//            ProgressBarWrapper()
+//            InfiniteProgressBar(backgroundColor: Color.white, indicatorColor: BBColor.green).frame(height: 20)
+//            Spacer()
+//        }.padding()
+//    }
+//}
