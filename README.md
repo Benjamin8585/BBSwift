@@ -40,6 +40,25 @@ If you want to specify explictely a language (ex: user has English phone but cho
 You can transform any view as a button for image selection with `.imagePickable(image: $viewModel.image)`
 The image binding you are passing is where the image result will be stored.
 
+### NumberPicker
+
+Inspired from: https://github.com/yashthaker7/NumberPicker
+
+There is few modifications from the original library
+
+```
+let numberPicker = NumberPicker(delegate: self, minNumber: 5, maxNumber: 30, cancelImage: UIImage(named: "numberpicker_cancel")!, doneImage: UIImage(named: "numberpicker_done")!, arrowImage: UIImage(named: "numberpicker_arrow")!)
+numberPicker.bgGradients = [Colors.Gradient.blue.uiColor(), Colors.Gradient.lightBlue.uiColor()]
+numberPicker.tintColor = .white
+numberPicker.heading = ("mintemp".localized() + " °C")
+numberPicker.defaultSelectedNumber = Int(self.minTemp ?? 5.0)
+router.presentedModal?.present(numberPicker, animated: true, completion: nil)
+```
+
+- We don't store images so you have to provide your own cancel done and arrow image. This will be solved with swift 5.3. If you don't want to change them just copy paste the original project images
+- Support of min value
+
+
 #### Customization
 
 By default the picker use these texts for popup:
