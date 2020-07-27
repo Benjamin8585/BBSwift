@@ -25,6 +25,10 @@ public class NumberPicker: UIViewController {
     var cancelBtn, doneBtn: UIButton!
     var titleLbl, numberLbl: UILabel!
     
+    var cancelImage: UIImage!
+    var doneImage: UIImage!
+    var arrowImage: UIImage!
+    
     var pickerViewBottomConstraint: NSLayoutConstraint?
     var cancelBtnLeftConstraint: NSLayoutConstraint?
     var doneBtnRightConstraint: NSLayoutConstraint?
@@ -58,7 +62,7 @@ public class NumberPicker: UIViewController {
     let cellId = "cellId"
 
     lazy var arrowImageView: UIImageView = {
-        let img: UIImage = getImageFromBundle("arrow")
+        let img: UIImage = self.arrowImage
         let imgView = UIImageView(image: img.withRenderingMode(.alwaysTemplate))
         imgView.translatesAutoresizingMaskIntoConstraints = false
         imgView.tintColor = tintColor
@@ -75,9 +79,12 @@ public class NumberPicker: UIViewController {
         }
     }
     
-    public init(delegate: NumberPickerDelegate, maxNumber: Int) {
+    public init(delegate: NumberPickerDelegate, maxNumber: Int, cancelImage: UIImage, doneImage: UIImage, arrowImage: UIImage) {
         self.delegate = delegate
         self.maxNumber = maxNumber
+        self.cancelImage = cancelImage
+        self.doneImage = doneImage
+        self.arrowImage = arrowImage
         super.init(nibName: nil, bundle: nil)
         self.modalPresentationStyle = .overCurrentContext
         self.modalTransitionStyle = .crossDissolve
@@ -107,8 +114,8 @@ public class NumberPicker: UIViewController {
         pickerView = createView()
         pickerView.layer.masksToBounds = true
         
-        cancelBtn = createBtn(getImageFromBundle("cancel"))
-        doneBtn = createBtn(getImageFromBundle("done"))
+        cancelBtn = createBtn(self.cancelImage)
+        doneBtn = createBtn(self.doneImage)
         doneBtn.tag = 99
         
         titleLbl = createLabel(heading, fontSize: 18)
@@ -252,20 +259,6 @@ public class NumberPicker: UIViewController {
         btn.tintColor = tintColor
         btn.addTarget(self, action: #selector(btnTapped(_:)), for: .touchUpInside)
         return btn
-    }
-    
-    func getImageFromBundle(_ name: String) -> UIImage {
-        let primaryBundle = Bundle(for: NumberPicker.self)
-        if let image = UIImage(named: name, in: primaryBundle, compatibleWith: nil) {
-            return image
-        } else if
-            let subBundleUrl = primaryBundle.url(forResource: "NumberPicker", withExtension: "bundle"),
-            let subBundle = Bundle(url: subBundleUrl),
-            let image = UIImage(named: name, in: subBundle, compatibleWith: nil)
-        {
-            return image
-        }
-        return UIImage()
     }
     
     required init?(coder aDecoder: NSCoder) {
