@@ -14,8 +14,9 @@ public struct NumberTextField : View {
     @State private var enteredValue : String = ""
     @Binding public var value : Double?
     public var placeholder: String
+    var accentColor: Color?
     
-    public init(placeholder: String, value: Binding<Double?>) {
+    public init(placeholder: String, value: Binding<Double?>, accentColor: Color = nil) {
         self.placeholder = placeholder
         self._value = value
         if let value = value.wrappedValue {
@@ -23,7 +24,7 @@ public struct NumberTextField : View {
         } else {
             self.enteredValue = ""
         }
-        
+        self.accentColor = accentColor
     }
 
     public var body: some View {
@@ -34,6 +35,6 @@ public struct NumberTextField : View {
                 if filtered != newValue, let new = Double(filtered) {
                     self.value = new
                 }
-        }
+        }.accentColor(self.accentColor)
     }
 }
