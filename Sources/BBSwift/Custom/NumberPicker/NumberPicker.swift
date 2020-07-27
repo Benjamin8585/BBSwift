@@ -16,6 +16,7 @@ public class NumberPicker: UIViewController {
     
     public var delegate: NumberPickerDelegate!
     public var maxNumber: Int!
+    public var minNumber: Int = 0
     public var bgGradients: [UIColor] = [.white, .white]
     public var tintColor = UIColor.black
     public var heading = ""
@@ -79,8 +80,9 @@ public class NumberPicker: UIViewController {
         }
     }
     
-    public init(delegate: NumberPickerDelegate, maxNumber: Int, cancelImage: UIImage, doneImage: UIImage, arrowImage: UIImage) {
+    public init(delegate: NumberPickerDelegate, minNumber: Int = 0, maxNumber: Int, cancelImage: UIImage, doneImage: UIImage, arrowImage: UIImage) {
         self.delegate = delegate
+        self.minNumber = minNumber
         self.maxNumber = maxNumber
         self.cancelImage = cancelImage
         self.doneImage = doneImage
@@ -187,9 +189,10 @@ public class NumberPicker: UIViewController {
     }
     
     func scrollToDefaultNumber(_ number: Int) {
-        if number <= 0 { return }
+        if number <= minNumber { return }
         if number > maxNumber { return }
-        let offset = CGPoint(x: CGFloat(number) * cellWidthIncludingSpacing - collectionView.contentInset.left, y: -collectionView.contentInset.top)
+        let diffFromMin = number - minNumber
+        let offset = CGPoint(x: CGFloat(diffFromMin) * cellWidthIncludingSpacing - collectionView.contentInset.left, y: -collectionView.contentInset.top)
         collectionView.setContentOffset(offset, animated: true)
     }
     
@@ -273,7 +276,7 @@ public class NumberPicker: UIViewController {
 extension NumberPicker: UICollectionViewDelegate, UICollectionViewDataSource {
     
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return maxNumber + 1
+        return (maxNumber - minNumber) + 1
     }
     
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -303,7 +306,8 @@ extension NumberPicker: UIScrollViewDelegate {
         let index = (offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing
         let roundedIndex = round(index)
         
-        selectedNumber = roundedIndex <= 0 ? 0 : Int(roundedIndex)
+        let number = roundedIndex <= 0 ? 0 : Int(roundedIndex)
+        selectedNumber = number + minNumber
     }
 }
 
