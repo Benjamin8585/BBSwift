@@ -12,13 +12,18 @@ import Combine
 public struct NumberTextField : View {
     
     @State private var enteredValue : String = ""
-    @Binding public var value : Double
+    @Binding public var value : Double?
     public var placeholder: String
     
-    public init(placeholder: String, value: Binding<Double>) {
+    public init(placeholder: String, value: Binding<Double?>) {
         self.placeholder = placeholder
         self._value = value
-        self.enteredValue = "\(self.value)"
+        if let value = value.wrappedValue {
+            self.enteredValue = "\(value)"
+        } else {
+            self.enteredValue = ""
+        }
+        
     }
 
     public var body: some View {
