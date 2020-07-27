@@ -9,19 +9,19 @@ import Foundation
 import SwiftUI
 import Combine
 
-struct NumberTextField : View {
+public struct NumberTextField : View {
     
     @State private var enteredValue : String = ""
-    @Binding var value : Double
-    var placeholder: String
+    @Binding public var value : Double
+    public var placeholder: String
     
-    init(placeholder: String, value: Binding<Double>) {
+    public init(placeholder: String, value: Binding<Double>) {
         self.placeholder = placeholder
         self._value = value
         self.enteredValue = "\(self.value)"
     }
 
-    var body: some View {
+    public var body: some View {
         return TextField(self.placeholder, text: $enteredValue)
             .keyboardType(.numberPad)
             .onReceive(Just(enteredValue)) { newValue in
