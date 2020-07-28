@@ -119,3 +119,12 @@ public extension String {
     }
 
 }
+
+public extension String {
+    
+    /// Return currency symbol
+    var currencySymbol: String? { return CurrencySymbol.shared.findSymbol(for: self) }
+    
+    /// Return short symbol (ex: $ instead of $US)
+    var currencyShortSymbol: String? { return CurrencySymbol.shared.findShortestSymbol(for: self) }
+}

@@ -16,7 +16,7 @@ public struct NumberTextField : View {
     public var placeholder: String
     var accentColor: Color?
     
-    public init(placeholder: String, value: Binding<Double?>, accentColor: Color = nil) {
+    public init(placeholder: String, value: Binding<Double?>, accentColor: Color? = nil) {
         self.placeholder = placeholder
         self._value = value
         if let value = value.wrappedValue {
