@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import Combine
 
 public enum NumberTextFieldType {
     case integer, price
@@ -21,8 +20,8 @@ public struct NumberTextField: UIViewRepresentable {
     var accentColor: Color?
     var type: NumberTextFieldType
     
-    var proxy: Binding<String> {
-         Binding<String>(
+    var proxy: Binding<String?> {
+         Binding<String?>(
              get: {
                 if let value = self.value {
                     if self.type == .integer {
@@ -31,13 +30,17 @@ public struct NumberTextField: UIViewRepresentable {
                         return String(format: "%.02f", Double(value))
                     }
                 } else {
-                    return ""
+                    return nil
                 }
              },
              set: {
-                 if let value = NumberFormatter().number(from: $0) {
-                     self.value = value.doubleValue
-                 }
+                guard let doubleValue = $0?.emptyFiltered() else {
+                    self.value = nil
+                    return
+                }
+                if let value = NumberFormatter().number(from: doubleValue) {
+                    self.value = value.doubleValue
+                }
              }
          )
      }
@@ -80,7 +83,7 @@ public struct NumberTextField: UIViewRepresentable {
         }
 
         public func textFieldDidChangeSelection(_ textField: UITextField) {
-            tf.proxy.wrappedValue = textField.text ?? ""
+            tf.proxy.wrappedValue = textField.text
         }
         
         public func textFieldDidEndEditing(_ textField: UITextField) {
