@@ -58,11 +58,29 @@ public struct NumberTextField: UIViewRepresentable {
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolBar.setItems([space, doneButton], animated: true)
         textfield.inputAccessoryView = toolBar
+        textfield.delegate = context.coordinator
         return textfield
     }
 
     public func updateUIView(_ uiView: UITextField, context: Context) {
         uiView.text = self.proxy.wrappedValue
+    }
+    
+    public func makeCoordinator() -> NumberTextField.Coordinator {
+        Coordinator(tf: self)
+    }
+
+    public class Coordinator: NSObject, UITextFieldDelegate {
+        
+        var tf: NumberTextField
+
+        init(tf: NumberTextField) {
+            self.tf = tf
+        }
+
+        public func textFieldDidChangeSelection(_ textField: UITextField) {
+            tf.proxy.wrappedValue = textField.text ?? ""
+        }
 
     }
 }
