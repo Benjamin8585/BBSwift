@@ -123,5 +123,8 @@ public extension String {
 public extension String {
     
     /// Return currency symbol
-    var currencySymbol: String? { return CurrencySymbol.findSymbol(for: self) }
+    var currencySymbol: String? {
+        let locale = NSLocale(localeIdentifier: self)
+        return locale.displayName(forKey: NSLocale.Key.currencySymbol, value: self)
+    }
 }
