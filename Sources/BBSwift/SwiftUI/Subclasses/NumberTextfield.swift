@@ -63,6 +63,7 @@ public struct NumberTextField: UIViewRepresentable {
         textfield.inputAccessoryView = toolBar
         textfield.delegate = context.coordinator
         textfield.text = self.proxy.wrappedValue
+        textfield.placeholder = placeholder
         return textfield
     }
     
