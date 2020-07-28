@@ -124,7 +124,12 @@ public extension String {
     
     /// Return currency symbol
     var currencySymbol: String? {
-        let locale = NSLocale(localeIdentifier: self)
-        return locale.displayName(forKey: NSLocale.Key.currencySymbol, value: self)
+        let code: String = self
+        let locale = NSLocale(localeIdentifier: code)
+        if locale.displayName(forKey: .currencySymbol, value: code) == code {
+            let newlocale = NSLocale(localeIdentifier: code.dropLast() + "_en")
+            return newlocale.displayName(forKey: .currencySymbol, value: code)
+        }
+        return locale.displayName(forKey: .currencySymbol, value: code)
     }
 }
