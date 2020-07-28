@@ -32,7 +32,7 @@ public struct NumberTextField : View {
             .keyboardType(.numberPad)
             .onReceive(Just(enteredValue)) { newValue in
                 let filtered = newValue.filter { "0123456789".contains($0) }
-                if filtered != enteredValue, let new = Double(filtered) {
+                if filtered == newValue, let new = Double(filtered) {
                     self.value = new
                 }
         }.accentColor(self.accentColor)
