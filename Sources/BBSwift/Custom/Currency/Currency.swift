@@ -34,7 +34,7 @@ extension CurrencySymbol {
         return formatter
     }
 
-    func findSymbol(for currencyCode: String) -> String? {
+    func findShortestSymbol(for currencyCode: String) -> String? {
         if let cachedCurrencyCode = symbolCache[currencyCode] { return cachedCurrencyCode }
         guard currencyCode.count < 4 else { return nil }
         let symbol = findShortestSymbol(for: currencyCode)
@@ -42,7 +42,7 @@ extension CurrencySymbol {
         return symbol
     }
 
-    func findShortestSymbol(for currencyCode: String) -> String? {
+    func findSymbol(for currencyCode: String) -> String? {
         var candidates = [String]()
         for localeId in NSLocale.availableLocaleIdentifiers {
             guard let symbol = findSymbolBy(localeId: localeId, currencyCode: currencyCode) else { continue }

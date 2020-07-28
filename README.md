@@ -59,6 +59,16 @@ router.presentedModal?.present(numberPicker, animated: true, completion: nil)
 - Support of min value
 
 
+#### Currencies symbols
+
+You can access currencies symbol with:
+
+`currencySymbol` -> Return symbol of currency (ex: $US)
+`currencyShortSymbol` -> Return the short version of symbol (ex: $)
+
+Usage example: `"USD".currencySymbol`
+
+
 #### Customization
 
 By default the picker use these texts for popup:
