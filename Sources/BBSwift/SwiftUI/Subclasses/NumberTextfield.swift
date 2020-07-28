@@ -9,32 +9,65 @@ import Foundation
 import SwiftUI
 import Combine
 
-public struct NumberTextField : View {
+public enum NumberTextFieldType {
+    case integer, price
+}
+
+public struct NumberTextField: UIViewRepresentable {
     
-    @State private var enteredValue : String = ""
     @Binding public var value : Double?
+    
     public var placeholder: String
     var accentColor: Color?
+    var type: NumberTextFieldType
     
-    public init(placeholder: String, value: Binding<Double?>, accentColor: Color? = nil) {
+    var proxy: String {
+        get {
+            if let value = self.value {
+                if self.type == .integer {
+                    return String(format: "%.0f", Double(value))
+                } else {
+                    return String(format: "%.02f", Double(value))
+                }
+            } else {
+                return ""
+            }
+        }
+        set(val) {
+            if let value = NumberFormatter().number(from: val) {
+                self.value = value.doubleValue
+            }
+        }
+    }
+    
+    public init(placeholder: String, value: Binding<Double?>, type: NumberTextFieldType, accentColor: Color? = nil) {
         self.placeholder = placeholder
         self._value = value
-        if let value = value.wrappedValue {
-            self.enteredValue = "\(value)"
-        } else {
-            self.enteredValue = ""
-        }
+        self.type = type
         self.accentColor = accentColor
     }
-
-    public var body: some View {
-        return TextField(self.placeholder, text: $enteredValue)
-            .keyboardType(.numberPad)
-            .onReceive(Just(enteredValue)) { newValue in
-                let filtered = newValue.filter { "0123456789".contains($0) }
-                if filtered == newValue, let new = Double(filtered) {
-                    self.value = new
-                }
-        }.accentColor(self.accentColor)
+    
+    public func makeUIView(context: Context) -> UITextField {
+        let textfield = UITextField()
+        textfield.keyboardType = .decimalPad
+        textfield.tintColor = self.accentColor?.uiColor()
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: textfield.frame.size.width, height: 44))
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(textfield.doneButtonTapped(button:)))
+        toolBar.items = [doneButton]
+        toolBar.setItems([doneButton], animated: true)
+        textfield.inputAccessoryView = toolBar
+        return textfield
     }
+
+    public func updateUIView(_ uiView: UITextField, context: Context) {
+        uiView.text = self.proxy
+
+    }
+}
+
+extension UITextField {
+    @objc func doneButtonTapped(button:UIBarButtonItem) -> Void {
+       self.resignFirstResponder()
+    }
+
 }
