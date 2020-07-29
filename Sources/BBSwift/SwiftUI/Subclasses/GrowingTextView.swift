@@ -21,15 +21,17 @@ public struct GrowingTextView: View {
     let textColor: Color?
     let minHeight: CGFloat
     let maxHeight: CGFloat
+    let accentColor: Color?
     
     /// Create a Growing text view. If no placeholder is provided the color is set to textColor. minHeight and maxheight are the min and max size of the textview
-    public init(text: Binding<String>, placeholder: String, textColor: Color? = nil, placeholderColor: Color? = nil,  minHeight: CGFloat = 39.0, maxHeight: CGFloat = 150.0) {
+    public init(text: Binding<String>, placeholder: String, textColor: Color? = nil, placeholderColor: Color? = nil,  minHeight: CGFloat = 39.0, maxHeight: CGFloat = 150.0, accentColor: Color?) {
         self._text = text
         self.placeholder = placeholder
         self.textColor = textColor
         self.placeholderColor = placeholderColor
         self.minHeight = minHeight
         self.maxHeight = maxHeight
+        self.accentColor = accentColor
     }
 
     public var countedHeight: CGFloat {
@@ -37,7 +39,7 @@ public struct GrowingTextView: View {
     }
 
     public var body: some View {
-        TextViewWrapper(placeholder: self.placeholder, placeholderColor: placeholderColor ?? BBColor.Text.main.getColor(scheme: scheme), textColor: textColor ?? BBColor.Text.main.getColor(scheme: scheme), text: $text, focused: $focused, contentHeight: $contentHeight).frame(height: countedHeight).padding(.leading, 5.0)
+        TextViewWrapper(placeholder: self.placeholder, placeholderColor: placeholderColor ?? BBColor.Text.main.getColor(scheme: scheme), textColor: textColor ?? BBColor.Text.main.getColor(scheme: scheme), accentColor: accentColor ?? BBColor.Text.main.getColor(scheme: scheme), text: $text, focused: $focused, contentHeight: $contentHeight).frame(height: countedHeight)
     }
 }
 
@@ -46,15 +48,17 @@ public struct TextViewWrapper: UIViewRepresentable {
     let placeholder: String
     let placeholderColor: UIColor
     let textColor: UIColor
+    let accentColor: UIColor
     
     @Binding var text: String
     @Binding var focused: Bool
     @Binding var contentHeight: CGFloat
 
-    public init(placeholder: String, placeholderColor: Color, textColor: Color, text: Binding<String>, focused: Binding<Bool>, contentHeight: Binding<CGFloat>) {
+    public init(placeholder: String, placeholderColor: Color, textColor: Color, accentColor: Color, text: Binding<String>, focused: Binding<Bool>, contentHeight: Binding<CGFloat>) {
         self.placeholder = placeholder
         self.placeholderColor = placeholderColor.uiColor()
         self.textColor = textColor.uiColor()
+        self.accentColor = accentColor.uiColor()
         self._text = text
         self._focused = focused
         self._contentHeight = contentHeight
@@ -67,6 +71,7 @@ public struct TextViewWrapper: UIViewRepresentable {
         textView.font = .systemFont(ofSize: 16)
         textView.backgroundColor = .clear
         textView.autocorrectionType = .no
+        textView.tintColor = self.accentColor
         return textView
     }
 
