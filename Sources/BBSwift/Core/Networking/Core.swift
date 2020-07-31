@@ -15,7 +15,7 @@ public protocol JSONConstructible {
 }
 
 /// Use this class if you don't want to parse the response
-public struct DontParse: JSONContructible {
+public struct DontParse: JSONConstructible {
     
     let json: JSON
     
@@ -41,8 +41,8 @@ public struct HTTPMethod: RawRepresentable, Equatable, Hashable {
 }
 
 public protocol Requestable {
-    func request<T>(type: Array<T>.Type) -> AnyPublisher<[T], APIError> where T: JSONContructible
-    func request<T>(type: T.Type) -> AnyPublisher<T, APIError> where T: JSONContructible
+    func request<T>(type: Array<T>.Type) -> AnyPublisher<[T], APIError> where T: JSONConstructible
+    func request<T>(type: T.Type) -> AnyPublisher<T, APIError> where T: JSONConstructible
 }
 
 public protocol APIRouteAssociable {

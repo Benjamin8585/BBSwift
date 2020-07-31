@@ -34,7 +34,7 @@ public extension APIRouteRequestable {
 public extension APIRouteRequestable {
     
     /// Request the server and return array of objects. You need to provide the type of the object inside array response
-    func request<T>(type: Array<T>.Type) -> AnyPublisher<[T], APIError> where T: JSONContructible {
+    func request<T>(type: Array<T>.Type) -> AnyPublisher<[T], APIError> where T: JSONConstructible {
         let request = try! self.asURLRequest()
         self.logRequest(request: request)
         let startDate = Date()
@@ -50,7 +50,7 @@ public extension APIRouteRequestable {
     }
 
     /// Request the server and return an object. You need to provide the type of the object
-    func request<T>(type: T.Type) -> AnyPublisher<T, APIError> where T: JSONContructible {
+    func request<T>(type: T.Type) -> AnyPublisher<T, APIError> where T: JSONConstructible {
         let request = try! self.asURLRequest()
          logRequest(request: request)
          let startDate = Date()
@@ -65,7 +65,7 @@ public extension APIRouteRequestable {
              .eraseToAnyPublisher()
     }
     
-    func uploadFile<T>(type: T.Type, paramName: String, fileName: String, contentType: String, fileData: Data) -> AnyPublisher<T, APIError> where T: JSONContructible {
+    func uploadFile<T>(type: T.Type, paramName: String, fileName: String, contentType: String, fileData: Data) -> AnyPublisher<T, APIError> where T: JSONConstructible {
         let url = (self.baseUrl + self.path).toUrl()!
         let boundary = UUID().uuidString
         var urlRequest = URLRequest(url: url)
