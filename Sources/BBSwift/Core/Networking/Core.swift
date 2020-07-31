@@ -10,7 +10,7 @@ import Combine
 
 public typealias JSON = [String: Any]
 
-public protocol JSONContructible {
+public protocol JSONConstructible {
     init(json: JSON) throws
 }
 
