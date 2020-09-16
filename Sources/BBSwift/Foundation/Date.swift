@@ -22,4 +22,10 @@ public extension Date {
         return gregorian!.date(byAdding: offsetComponents, to: today, options: .init(rawValue: 0))!
     }
 
+    /// Transform a date object to a mongoDb formatted string for date storage
+    func toIso8601Format() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        return dateFormatter.string(from: self)
+    }
 }
