@@ -22,7 +22,7 @@ public struct VideoPickerModifier: ViewModifier {
             self.showActionSheet = true
         }
         .actionSheet(isPresented: $showActionSheet) {
-            ActionSheet(title: Text(BBSwift.instance.options.picker.title), message: Text(BBSwift.instance.options.picker.message), buttons: [
+            ActionSheet(title: Text(BBSwift.instance.options.picker.videoTitle), message: Text(BBSwift.instance.options.picker.videoMessage), buttons: [
                 .default(Text(BBSwift.instance.options.picker.library)) {
                     self.pickerType = .photoLibrary
                     self.showVideoPicker = true

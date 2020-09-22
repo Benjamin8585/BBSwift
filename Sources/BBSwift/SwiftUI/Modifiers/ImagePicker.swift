@@ -21,7 +21,7 @@ public struct ImagePickerModifier: ViewModifier {
             self.showActionSheet = true
         }
         .actionSheet(isPresented: $showActionSheet) {
-            ActionSheet(title: Text(BBSwift.instance.options.picker.title), message: Text(BBSwift.instance.options.picker.message), buttons: [
+            ActionSheet(title: Text(BBSwift.instance.options.picker.imageTitle), message: Text(BBSwift.instance.options.picker.imageMessage), buttons: [
                 .default(Text(BBSwift.instance.options.picker.library)) {
                     self.pickerType = .photoLibrary
                     self.showImagePicker = true

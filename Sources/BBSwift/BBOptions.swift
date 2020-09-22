@@ -14,14 +14,18 @@ public enum LogRequestMode {
 
 public struct BBPickerOptions {
     
-    public var title: String
-    public var message: String
+    public var imageTitle: String
+    public var imageMessage: String
+    public var videoTitle: String
+    public var videoMessage: String
     public var camera: String
     public var library: String
     
-    public init(title: String = "Pick an image", message: String = "Choose where to pick an image", camera: String = "from Camera", library: String = "from Library") {
-        self.title = title
-        self.message = message
+    public init(imageTitle: String = "Pick an image", imageMessage: String = "Choose where to pick an image", videoTitle: String = "Pick a video", videoMessage: String = "Choose where to pick a video", camera: String = "from Camera", library: String = "from Library") {
+        self.imageTitle = imageTitle
+        self.imageMessage = imageMessage
+        self.videoTitle = videoTitle
+        self.videoMessage = videoMessage
         self.camera = camera
         self.library = library
     }
