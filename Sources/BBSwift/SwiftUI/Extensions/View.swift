@@ -27,6 +27,11 @@ public extension View {
         self.modifier(ImagePickerModifier(image: image))
     }
     
+    /// Add a video picker to the view
+    func videoPickable(video: Binding<Data?>) -> some View {
+        self.modifier(VideoPickerModifier(video: video))
+    }
+    
     /// Transform the view as a popup
     func popupify(showPopup: Binding<Bool>, backgroundColor: Color = Color.black.opacity(0.4), closeOnTap: Bool = false) -> some View {
         self.modifier(PopupModifier(showPopup: showPopup, backgroundColor: backgroundColor, closeOnTap: closeOnTap))
