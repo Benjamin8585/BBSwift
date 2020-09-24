@@ -58,6 +58,10 @@ router.presentedModal?.present(numberPicker, animated: true, completion: nil)
 - We don't store images so you have to provide your own cancel done and arrow image. This will be solved with swift 5.3. If you don't want to change them just copy paste the original project images
 - Support of min value
 
+### NumberTextfield
+
+Easy Textfield for numbers. Support optional value. You can also provide the type of number you want: - price (two digits) - integer or a custom one (ex: `%.03f`) for 3 digits value
+
 
 #### Currencies symbols
 

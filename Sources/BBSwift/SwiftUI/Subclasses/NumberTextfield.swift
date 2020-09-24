@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 public enum NumberTextFieldType {
-    case integer, price
+    case integer, price, custom(format: String)
 }
 
 public struct NumberTextField: UIViewRepresentable {
@@ -24,10 +24,13 @@ public struct NumberTextField: UIViewRepresentable {
          Binding<String?>(
              get: {
                 if let value = self.value {
-                    if self.type == .integer {
+                    switch self.type {
+                    case .integer:
                         return String(format: "%.0f", Double(value))
-                    } else {
+                    case .price:
                         return String(format: "%.02f", Double(value))
+                    case .custom(let format):
+                        return String(format: format, Double(value))
                     }
                 } else {
                     return nil
