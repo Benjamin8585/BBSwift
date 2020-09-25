@@ -81,6 +81,11 @@ By default the picker use these texts for popup:
  - "from Camera"
  - "from Library"
 
+### CustomList
+
+Because List is annoying and has bugs (on iOS 13) and ugly display (iOS 14), CustomList is just a wrapper when you provide the objects and the View is displayed if count > 0.
+Because with an empty ScrollView you will have some bugs.
+
 You can customize these texts with `BBPickerOptions`.
 
 Here is an example when I want to use my own texts with localization:
