@@ -43,7 +43,7 @@ extension UIView {
         self.layer.mask = mask
     }
     
-    func toImage() -> UIImage? {
+    public func toImage() -> UIImage? {
         UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.isOpaque, 0.0)
         defer { UIGraphicsEndImageContext() }
         if let context = UIGraphicsGetCurrentContext() {
