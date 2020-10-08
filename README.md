@@ -94,3 +94,7 @@ var options = BBOptions(logRequestMode: .all)
 options.picker = BBPickerOptions(title: "imagepicker_title".localized(), message: "imagepicker_message".localized(), camera: "imagepicker_camera".localized(), library: "imagepicker_library".localized())
 BBSwift.configure(options: options)
 ```
+
+### GridStack
+
+This is the SwiftUI collectionview equivalent. It iterates through rows, column and objects you provide. Just specify the number of columns and you're good to go.
