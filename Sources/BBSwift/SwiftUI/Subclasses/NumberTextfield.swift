@@ -41,7 +41,13 @@ public struct NumberTextField: UIViewRepresentable {
                     self.value = nil
                     return
                 }
-                if let value = NumberFormatter().number(from: doubleValue) {
+                let dotFormatter = NumberFormatter()
+                dotFormatter.decimalSeparator = "."
+                let commaFormatter = NumberFormatter()
+                commaFormatter.decimalSeparator = ","
+                if let value = dotFormatter.number(from: doubleValue) {
+                    self.value = value.doubleValue
+                } else if let value = commaFormatter.number(from: doubleValue) {
                     self.value = value.doubleValue
                 }
              }
