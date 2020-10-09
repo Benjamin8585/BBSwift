@@ -97,8 +97,7 @@ public struct NumberTextField: UIViewRepresentable {
         }
         
         public func textFieldDidBeginEditing(_ textField: UITextField) {
-            textField.text = "0.0"
-            tf.proxy.wrappedValue = "0.0"
+            textField.text = tf.proxy.wrappedValue ?? "0.0"
         }
         
         public func textFieldDidEndEditing(_ textField: UITextField) {
