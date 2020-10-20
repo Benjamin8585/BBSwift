@@ -7,6 +7,16 @@
 
 import Foundation
 
+public func unique<S : Sequence, T : Equatable>(source: S) -> [T] where S.Iterator.Element == T {
+    var added = Array<T>()
+    for elem in source {
+        if !added.contains(elem) {
+            added.append(elem)
+        }
+    }
+    return added
+}
+
 public struct TwoDimension<T>: Identifiable {
 
     public var id: UUID
