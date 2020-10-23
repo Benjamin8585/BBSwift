@@ -50,11 +50,11 @@ public struct ActionButton: View {
     }
 }
 
-//struct ActionButton_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            ActionButton(isLoading: .constant(true), buttonInfo: (Color.blue, "Add Text", "bolt.fill"))
-//            ActionButton(isLoading: .constant(false), buttonInfo: (Color.blue, "Add Text", "bolt.fill"))
-//        }
-//    }
-//}
+struct ActionButton_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            ActionButton(isLoading: .constant(true), buttonInfo: (Color.blue, "Add Text", "bolt.fill"))
+            ActionButton(isLoading: .constant(false), buttonInfo: (Color.blue, "Add Text", "bolt.fill"))
+        }
+    }
+}

@@ -17,7 +17,7 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         .package(name: "Introspect", url: "https://github.com/siteline/SwiftUI-Introspect", from: "0.1.0"),
         .package(name: "Gloss", url: "https://github.com/hkellaway/Gloss", from: "3.1.0"),
-        .package(name: "CryptoSwift", url: "https://github.com/krzyzanowskim/CryptoSwift", from: "1.3.1")
+        .package(name: "CryptoSwift", url: "https://github.com/krzyzanowskim/CryptoSwift", from: "1.3.2")
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -25,8 +25,5 @@ let package = Package(
         .target(name: "BBSwift", dependencies: [
             "Introspect", "Gloss", "CryptoSwift"
         ]),
-        .testTarget(
-            name: "BBSwiftTests",
-            dependencies: ["BBSwift", "Introspect", "Gloss", "CryptoSwift"]),
     ]
 )

@@ -95,11 +95,11 @@ struct FormSectionContainer: View {
 }
 
 
-//struct FormSection_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            FormSectionContainer().environment(\.colorScheme, .light)
-//            FormSectionContainer().environment(\.colorScheme, .dark)
-//        }
-//    }
-//}
+struct FormSection_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            FormSectionContainer().environment(\.colorScheme, .light)
+            FormSectionContainer().environment(\.colorScheme, .dark)
+        }
+    }
+}

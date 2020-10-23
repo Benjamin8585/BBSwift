@@ -133,12 +133,12 @@ public struct TextViewWrapper: UIViewRepresentable {
     }
 }
 
-//struct GrowingTextView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        VStack {
-//            Spacer()
-//            GrowingTextView(text: .constant(""), placeholder: "Here is the placeholder").background(Color.red)
-//            Spacer()
-//        }
-//    }
-//}
+struct GrowingTextView_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack {
+            Spacer()
+            GrowingTextView(text: .constant(""), placeholder: "Here is the placeholder", accentColor: Color.blue).background(Color.red)
+            Spacer()
+        }
+    }
+}

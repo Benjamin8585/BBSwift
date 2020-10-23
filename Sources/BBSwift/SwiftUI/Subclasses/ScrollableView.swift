@@ -54,10 +54,10 @@ struct ScrollableViewContainer: View {
     
 }
 
-//struct ScrollableView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        VStack {
-//            ScrollableViewContainer()
-//        }
-//    }
-//}
+struct ScrollableView_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack {
+            ScrollableViewContainer()
+        }
+    }
+}

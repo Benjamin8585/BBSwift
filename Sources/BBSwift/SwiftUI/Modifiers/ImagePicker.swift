@@ -86,8 +86,8 @@ struct ImagePicker : UIViewControllerRepresentable {
 }
 
 
-//struct ImagePicker_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ImagePicker(isShown: .constant(false), image: .constant(UIImage()), sourceType: .constant(.photoLibrary))
-//    }
-//}
+struct ImagePicker_Previews: PreviewProvider {
+    static var previews: some View {
+        ImagePicker(isShown: .constant(false), image: .constant(UIImage()), sourceType: .constant(.photoLibrary))
+    }
+}

@@ -51,13 +51,13 @@ public struct TriangleIndicator: View {
     }
 }
 
-//struct TriangleIndicator_Previews: PreviewProvider {
-//    static var previews: some View {
-//        VStack {
-//            TriangleIndicator(color: Color.red, direction: .up)
-//            TriangleIndicator(color: Color.black, direction: .down)
-//            TriangleIndicator(color: Color.blue, direction: .left)
-//            TriangleIndicator(color: Color.yellow, direction: .right)
-//        }
-//    }
-//}
+struct TriangleIndicator_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack {
+            TriangleIndicator(color: Color.red, direction: .up)
+            TriangleIndicator(color: Color.black, direction: .down)
+            TriangleIndicator(color: Color.blue, direction: .left)
+            TriangleIndicator(color: Color.yellow, direction: .right)
+        }
+    }
+}

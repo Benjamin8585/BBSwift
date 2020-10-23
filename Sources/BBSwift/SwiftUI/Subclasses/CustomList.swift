@@ -47,9 +47,9 @@ struct CustomListWrapper: View {
     }
 }
 
-//struct CustomList_Previews: PreviewProvider {
-//    
-//    static var previews: some View {
-//        CustomListWrapper()
-//    }
-//}
+struct CustomList_Previews: PreviewProvider {
+    
+    static var previews: some View {
+        CustomListWrapper()
+    }
+}
