@@ -98,3 +98,7 @@ BBSwift.configure(options: options)
 ### GridStack
 
 This is the SwiftUI collectionview equivalent. It iterates through rows, column and objects you provide. Just specify the number of columns and you're good to go.
+
+### Print
+
+Use this to print data inside a SwiftUI view

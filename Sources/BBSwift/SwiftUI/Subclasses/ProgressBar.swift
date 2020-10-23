@@ -36,14 +36,18 @@ public struct ProgressBar: View {
     }
 }
 
-/// A progressbar running indifinitely
-public struct InfiniteProgressBar: View {
 
-    @State private var isAnimating: Bool = false
+/// A progressbar running indifinitely
+@available(iOS 14.0, *)
+public struct Infinite14ProgressBar: View {
 
     var indicatorWidth: CGFloat
     var backgroundColor: Color
     var indicatorColor: Color
+    
+    // iOS 14
+    @Namespace private var animation
+    @State private var shouldRevert: Bool
     
     public init(indicatorWidth: CGFloat = 30.0, backgroundColor: Color, indicatorColor: Color) {
         self.indicatorWidth = indicatorWidth
@@ -57,13 +61,91 @@ public struct InfiniteProgressBar: View {
                 Rectangle().frame(width: geometry.size.width, height: geometry.size.height)
                     .opacity(0.3)
                     .foregroundColor(self.backgroundColor)
-                Rectangle().frame(width: self.indicatorWidth, height: geometry.size.height)
-                    .offset(x: self.isAnimating ? geometry.size.width : -self.indicatorWidth, y: 0)
-                    .foregroundColor(self.indicatorColor)
-                    .animation(Animation.linear(duration: 1.2).repeatForever())
-                    .onAppear {
-                        self.isAnimating = true
+                if self.shouldRevert {
+                    Rectangle().frame(width: self.indicatorWidth, height: geometry.size.height)
+                        .offset(x: -self.indicatorWidth, y: 0)
+                        .matchedGeometryEffect(id: "progress", in: animation)
+                        .foregroundColor(self.indicatorColor)
+                        .onAppear {
+                            self.shouldRevert = false
+                        }
+                        .animation(Animation.linear(duration: 1.2))
+                } else {
+                    Rectangle().frame(width: self.indicatorWidth, height: geometry.size.height)
+                        .offset(x: geometry.size.width, y: 0)
+                        .matchedGeometryEffect(id: "progress", in: animation)
+                        .foregroundColor(self.indicatorColor)
+                        .onAppear {
+                            self.shouldRevert = true
+                        }
+                        .animation(Animation.linear(duration: 1.2))
+                        
+                }
+            }.cornerRadius(45.0)
+        }
+    }
+
+    mutating func indicatorColor(color: Color) {
+        self.indicatorColor = color
+    }
+}
+
+/// A progressbar running indifinitely
+public struct Infinite13ProgressBar: View {
+
+    // iOS 13
+    @State private var isAnimating: Bool = false
+
+    var indicatorWidth: CGFloat
+    var backgroundColor: Color
+    var indicatorColor: Color
+    
+    // iOS 14
+    @Namespace private var animation
+    @State private var shouldRevert: Bool
+    
+    public init(indicatorWidth: CGFloat = 30.0, backgroundColor: Color, indicatorColor: Color) {
+        self.indicatorWidth = indicatorWidth
+        self.backgroundColor = backgroundColor
+        self.indicatorColor = indicatorColor
+    }
+
+    public var body: some View {
+        GeometryReader { geometry in
+            ZStack(alignment: .leading) {
+                Rectangle().frame(width: geometry.size.width, height: geometry.size.height)
+                    .opacity(0.3)
+                    .foregroundColor(self.backgroundColor)
+                if #available(iOS 14.0, *) {
+                    if self.shouldRevert {
+                        Rectangle().frame(width: self.indicatorWidth, height: geometry.size.height)
+                            .offset(x: -self.indicatorWidth, y: 0)
+                            .matchedGeometryEffect(id: "progress", in: animation)
+                            .foregroundColor(self.indicatorColor)
+                            .onAppear {
+                                self.shouldRevert = false
+                            }
+                            .animation(Animation.linear(duration: 1.2))
+                    } else {
+                        Rectangle().frame(width: self.indicatorWidth, height: geometry.size.height)
+                            .offset(x: geometry.size.width, y: 0)
+                            .matchedGeometryEffect(id: "progress", in: animation)
+                            .foregroundColor(self.indicatorColor)
+                            .onAppear {
+                                self.shouldRevert = true
+                            }
+                            .animation(Animation.linear(duration: 1.2))
+                            
                     }
+                } else {
+                    Rectangle().frame(width: self.indicatorWidth, height: geometry.size.height)
+                        .offset(x: self.isAnimating ? geometry.size.width : -self.indicatorWidth, y: 0)
+                        .foregroundColor(self.indicatorColor)
+                        .animation(Animation.linear(duration: 1.2).repeatForever())
+                        .onAppear {
+                            self.isAnimating = true
+                        }
+                }
             }.cornerRadius(45.0)
         }
     }
