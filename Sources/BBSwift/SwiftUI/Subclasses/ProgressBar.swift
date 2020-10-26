@@ -53,8 +53,7 @@ public struct InfiniteProgressBar: View {
 
     public var body: some View {
         GeometryReader { geometry in
-            VStack(alignment: .center, spacing: 0) {
-                Spacer()
+            ZStack(alignment: .center) {
                 ZStack(alignment: .leading) {
                     Rectangle().frame(width: geometry.size.width, height: geometry.size.height)
                         .opacity(0.3)
@@ -67,8 +66,7 @@ public struct InfiniteProgressBar: View {
                             self.isAnimating = true
                         }
                 }.cornerRadius(45.0)
-                Spacer()
-            }
+            }.frame(width: geometry.size.width, height: geometry.size.height)
         }
     }
 
