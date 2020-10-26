@@ -11,6 +11,10 @@ import SwiftUI
 public struct ButtonActivityIndicator: View {
 
     @State private var isAnimating: Bool = false
+    
+    public init() {
+        
+    }
 
     public var body: some View {
       GeometryReader { (geometry: GeometryProxy) in
