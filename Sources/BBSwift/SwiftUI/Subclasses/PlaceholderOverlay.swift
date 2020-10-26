@@ -36,19 +36,11 @@ public struct PlaceholderOverlay: View {
                     ZStack {
                         PlaceholderView(image: self.image, text: self.text)
                             .opacity(!isLoading && showPlaceholderCondition ? 1 : 0)
-                        if #available(iOS 14.0, *) {
-                            ProgressView().progressViewStyle(CircularProgressViewStyle())
-                                .frame(width: 40, height: 40)
-                                .offset(x: 0, y: -50)
-                                .foregroundColor(BBColor.Text.grayMedium)
-                                .opacity(isLoading ? 1 : 0)
-                        } else {
-                            ButtonActivityIndicator()
-                                .frame(width: 40, height: 40)
-                                .offset(x: 0, y: -50)
-                                .foregroundColor(BBColor.Text.grayMedium)
-                                .opacity(isLoading ? 1 : 0)
-                        }
+                        ButtonActivityIndicator()
+                            .frame(width: 40, height: 40)
+                            .offset(x: 0, y: -50)
+                            .foregroundColor(BBColor.Text.grayMedium)
+                            .opacity(isLoading ? 1 : 0)
                     }
                 }
             }
