@@ -19,7 +19,6 @@ public struct ButtonActivityIndicator: View {
     public var body: some View {
       GeometryReader { (geometry: GeometryProxy) in
         ZStack(alignment: .center) {
-            Print("Size: \(geometry.size.width) \(geometry.size.height)")
             ForEach(0..<5) { index in
               Group {
                 Circle()
