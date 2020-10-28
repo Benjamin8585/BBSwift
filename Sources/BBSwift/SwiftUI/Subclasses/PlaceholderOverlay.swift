@@ -33,7 +33,7 @@ public struct PlaceholderOverlay: View {
                     EmptyView()
                 } else {
                     (self.backgroundColor ?? BBColor.Background.blackOrWhite.getColor(scheme: scheme)).opacity(!isLoading && !showPlaceholderCondition ? 0 : 1)
-                    ZStack {
+                    ZStack(alignment: .center) {
                         PlaceholderView(image: self.image, text: self.text)
                             .opacity(!isLoading && showPlaceholderCondition ? 1 : 0)
                         ButtonActivityIndicator()
