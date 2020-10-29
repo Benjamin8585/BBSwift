@@ -12,13 +12,9 @@ let package = Package(
         .library(
             name: "BBSwift",
             targets: ["BBSwift"]),
-        .library(
-            name: "BBSwiftFull",
-            targets: ["BBSwift", "BBSwiftScroll"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(name: "Introspect", url: "https://github.com/siteline/SwiftUI-Introspect", from: "0.1.0"),
         .package(name: "Gloss", url: "https://github.com/hkellaway/Gloss", from: "3.1.0"),
         .package(name: "CryptoSwift", url: "https://github.com/krzyzanowskim/CryptoSwift", from: "1.3.2")
     ],
@@ -27,9 +23,6 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(name: "BBSwift", dependencies: [
             "Gloss", "CryptoSwift"
-        ]),
-        .target(name: "BBSwiftScroll", dependencies: [
-            "Introspect"
         ]),
     ]
 )

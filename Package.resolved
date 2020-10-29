@@ -18,15 +18,6 @@
           "revision": "d2249d299a17418dc69b7685a00ccd31510cf14e",
           "version": "3.1.0"
         }
-      },
-      {
-        "package": "Introspect",
-        "repositoryURL": "https://github.com/siteline/SwiftUI-Introspect",
-        "state": {
-          "branch": null,
-          "revision": "de5c32c15ae169cfcb27397ffb2734dcd0e1e6d5",
-          "version": "0.1.0"
-        }
       }
     ]
   },
