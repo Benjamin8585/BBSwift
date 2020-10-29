@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import Introspect
 
+@available(iOS 13.0, *)
 public struct ScrollableView<Content>: View where Content: View {
     
     private let content: Content
