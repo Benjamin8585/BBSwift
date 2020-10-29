@@ -60,7 +60,7 @@ public enum APIError: Error, Equatable {
     case decodingFailed(response: URLResponse?, data: Data)
     case badGateway, internalServerError, tooManyRequests, notFound, tokenExpired
     case networkCallCancelled
-    case fromServer(String, Int, String)
+    case fromServer(ServerError)
     case custom(error: Error)
     case json
     case parsingFailed(object: String, property: String?)
@@ -89,8 +89,8 @@ public enum APIError: Error, Equatable {
             return 500
             case .badGateway:
                 return 502
-        case .fromServer(_, let code, _):
-            return code
+        case .fromServer(let error):
+            return error.status
         case .custom(let error):
             return Int(error.localizedDescription) ?? -1
         }
@@ -104,8 +104,8 @@ public enum APIError: Error, Equatable {
         switch self {
         case .custom(let error):
             return error.localizedDescription
-        case .fromServer( _, _, let message):
-            return message.unquoted()
+        case .fromServer(let error):
+            return error.message.unquoted()
         case .tokenExpired:
             return "apierror_tokenexpired".localized()
         case .encodingFailed:

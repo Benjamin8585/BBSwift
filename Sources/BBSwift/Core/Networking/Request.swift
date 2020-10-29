@@ -8,7 +8,34 @@
 import Foundation
 import Combine
 import SwiftUI
-import Gloss
+
+public protocol JSONDecodable: Decodable {
+    
+}
+
+public extension JSONDecodable {
+    init(json: JSON) throws {
+        let jsonData = try JSONSerialization.data(withJSONObject: json, options: [])
+        let decoder = JSONDecoder()
+        self = try decoder.decode(Self.self, from: jsonData)
+    }
+}
+
+public struct ServerError: JSONDecodable, Decodable {
+    
+    var name: String
+    var message: String
+    var status: Int
+    
+    private enum CodingKeys: String, CodingKey {
+        case name, message, status
+    }
+    
+    init(data: Data) throws {
+        let decoder = JSONDecoder()
+        self = try decoder.decode(ServerError.self, from: data)
+    }
+}
 
 public extension APIRouteRequestable {
     
@@ -116,11 +143,8 @@ public extension APIRouteRequestable {
 
     func checkErrors(response: URLResponse?, data: Data) throws {
         guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
-            guard let json: JSON = try? data.toJson() else {
-                throw self.errorForResponse(response: response, data: data)
-            }
-            if let name: String = "name" <~~ json, let message: String = "message" <~~ json, let status: Int = "status" <~~ json {
-                throw APIError.fromServer(name, status, message)
+            if let error = try? ServerError(data: data) {
+                throw APIError.fromServer(error)
             } else {
                 throw self.errorForResponse(response: response, data: data)
             }
