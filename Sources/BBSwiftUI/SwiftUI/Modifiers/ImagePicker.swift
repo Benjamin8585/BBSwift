@@ -21,12 +21,12 @@ public struct ImagePickerModifier: ViewModifier {
             self.showActionSheet = true
         }
         .actionSheet(isPresented: $showActionSheet) {
-            ActionSheet(title: Text(BBSwift.instance.options.picker.imageTitle), message: Text(BBSwift.instance.options.picker.imageMessage), buttons: [
-                .default(Text(BBSwift.instance.options.picker.library)) {
+            ActionSheet(title: Text(BBSwiftUI.instance.options.picker.imageTitle), message: Text(BBSwiftUI.instance.options.picker.imageMessage), buttons: [
+                .default(Text(BBSwiftUI.instance.options.picker.library)) {
                     self.pickerType = .photoLibrary
                     self.showImagePicker = true
                 },
-                .default(Text(BBSwift.instance.options.picker.camera)) {
+                .default(Text(BBSwiftUI.instance.options.picker.camera)) {
                     self.pickerType = .camera
                     self.showImagePicker = true
                 },

@@ -1,40 +1,37 @@
 //
-//  BBSwift.swift
-//  BBSwift
+//  File.swift
+//  
 //
-//  Created by Benjamin Bourasseau on 25/06/2020.
+//  Created by Benjamin Bourasseau on 2020/10/29.
 //
+
 import Foundation
 
-public struct BBSwift {
+public struct BBSwiftUI {
     
-    static private(set) var instance: BBSwift = BBSwift()
+    static private(set) var instance: BBSwiftUI = BBSwiftUI()
     
-    var options: BBOptions
+    var options: BBOptionsUI
     
     public var localizationLanguage: String?
     public var bundle: Bundle = Bundle.main
     
-    public init(options: BBOptions = BBOptions()) {
+    public init(options: BBOptionsUI = BBOptionsUI()) {
         self.options = options
     }
     
     /// Default configuration of the Framework
-    public static func configure(options: BBOptions) {
-        BBSwift.instance.options = options
+    public static func configure(options: BBOptionsUI) {
+        BBSwiftUI.instance.options = options
     }
     
     /// If you want the localize function to override the default phone language
     public static func setLocalizationLanguage(lang: String) {
-        BBSwift.instance.localizationLanguage = lang
+        BBSwiftUI.instance.localizationLanguage = lang
     }
     
     /// If for any fucking reason you want to change the bundle the framework operates in
     public static func setBundle(bundle: Bundle) {
-        BBSwift.instance.bundle = bundle
+        BBSwiftUI.instance.bundle = bundle
     }
-}
-
-public enum BBSwiftError: Error {
-    case base64Invalid
 }

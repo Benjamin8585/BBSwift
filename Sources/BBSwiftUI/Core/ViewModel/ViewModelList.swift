@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import BBSwift
 
 open class ViewModelList<T: JSONConstructible & ObservableObject>: ObservableObject where T: APIRouteAssociable {
 
@@ -44,7 +45,7 @@ open class ViewModelList<T: JSONConstructible & ObservableObject>: ObservableObj
             switch result {
             case .failure(let error):
                 if showError {
-                    self.bannerData = BannerData(title: BBSwift.instance.options.banner.apiErrorTitle, detail: error.message, type: .error)
+                    self.bannerData = BannerData(title: BBSwiftUI.instance.options.banner.apiErrorTitle, detail: error.message, type: .error)
                     self.showBanner = error != APIError.networkCallCancelled
                 }
                 compl?(error)

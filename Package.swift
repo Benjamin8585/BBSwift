@@ -12,6 +12,9 @@ let package = Package(
         .library(
             name: "BBSwift",
             targets: ["BBSwift"]),
+        .library(
+            name: "BBSwiftUI",
+            targets: ["BBSwift", "BBSwiftUI"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -23,5 +26,6 @@ let package = Package(
         .target(name: "BBSwift", dependencies: [
             "CryptoSwift"
         ]),
+        .target(name: "BBSwiftUI", dependencies: []),
     ]
 )
