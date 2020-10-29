@@ -12,6 +12,7 @@ public protocol NumberPickerDelegate {
     func selectedNumber(_ number: Int)
 }
 
+@available(iOS 13.0, *)
 public class NumberPicker: UIViewController {
     
     public var delegate: NumberPickerDelegate!
