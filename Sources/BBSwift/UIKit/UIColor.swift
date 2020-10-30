@@ -6,6 +6,8 @@
 //
 
 import Foundation
+
+#if !os(macOS)
 import UIKit
 
 public extension UIColor {
@@ -72,3 +74,4 @@ public extension UIColor {
         return UIColor(red: redValue, green: greenValue, blue: blueValue, alpha: alphaValue)
     }
 }
+#endif
