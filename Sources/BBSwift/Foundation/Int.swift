@@ -31,4 +31,37 @@ public extension Int {
     func secondsToHoursMinutesSeconds() -> (hour: Int, min: Int, sec: Int) {
         return (self / 3600, (self % 3600) / 60, self % 60)
     }
+    
+    var secondsToHoursMinutesSecondsFormatted: String {
+        let time = self.secondsToHoursMinutesSeconds()
+        if time.hour > 0 {
+            if time.min > 0 {
+                if time.sec > 0 {
+                    return String(format: "%02dH %02dmin %02dsec", time.hour, time.min, time.sec)
+                } else {
+                    return String(format: "%02dH %02dmin", time.hour, time.min)
+                }
+            } else {
+                if time.sec > 0 {
+                    return String(format: "%02dH %02dsec", time.hour, time.sec)
+                } else {
+                    return String(format: "%02dH", time.hour)
+                }
+            }
+        } else {
+            if time.min > 0 {
+                if time.sec > 0 {
+                    return String(format: "%02dmin %02dsec", time.hour, time.min, time.sec)
+                } else {
+                    return String(format: "%02dmin", time.hour, time.min)
+                }
+            } else {
+                if time.sec > 0 {
+                    return String(format: "%02dsec", time.hour, time.sec)
+                } else {
+                    return "0"
+                }
+            }
+        }
+    }
 }
