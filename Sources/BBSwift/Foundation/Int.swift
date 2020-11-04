@@ -51,13 +51,13 @@ public extension Int {
         } else {
             if time.min > 0 {
                 if time.sec > 0 {
-                    return String(format: "%02dmin %02dsec", time.hour, time.min, time.sec)
+                    return String(format: "%02dmin %02dsec", time.min, time.sec)
                 } else {
-                    return String(format: "%02dmin", time.hour, time.min)
+                    return String(format: "%02dmin", time.min)
                 }
             } else {
                 if time.sec > 0 {
-                    return String(format: "%02dsec", time.hour, time.sec)
+                    return String(format: "%02dsec", time.sec)
                 } else {
                     return "0"
                 }
