@@ -14,6 +14,10 @@ public protocol JSONConstructible {
     init(json: JSON) throws
 }
 
+public protocol JSONEncodable {
+    func toJSON() -> JSON?
+}
+
 /// Use this class if you don't want to parse the response
 public struct DontParse: JSONConstructible {
     
