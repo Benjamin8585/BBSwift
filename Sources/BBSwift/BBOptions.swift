@@ -36,7 +36,7 @@ public struct BBBannerOptions {
     public var apiErrorTitle: String
     
     public init(apiErrorTitle: String? = nil) {
-        self.apiErrorTitle = apiErrorTitle ?? "api_error".localized(bundle: .module)
+        self.apiErrorTitle = apiErrorTitle ?? NSLocalizedString("api_error", tableName: nil, bundle: .module, comment: "")
     }
 }
 
