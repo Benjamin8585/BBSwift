@@ -79,7 +79,7 @@ public struct TextViewWrapper: UIViewRepresentable {
         textView.autocorrectionType = .no
         textView.tintColor = self.accentColor
         if self.showToolbar {
-            let doneButton = UIBarButtonItem(title: "done".localized(bundle: .module), style: .done, target: self, action: #selector(context.coordinator.doneTapped))
+            let doneButton = UIBarButtonItem(title: "done".localized(bundle: .module), style: .done, target: context.coordinator, action: #selector(Coordinator.doneTapped))
             let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
             let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 44.0))
             toolbar.setItems([space, doneButton], animated: false)
