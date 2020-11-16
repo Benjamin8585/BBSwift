@@ -22,12 +22,12 @@ public struct BBPickerOptions {
     public var library: String
     
     public init(imageTitle: String? = nil, imageMessage: String? = nil, videoTitle: String? = nil, videoMessage: String? = nil, camera: String? = nil, library: String? = nil) {
-        self.imageTitle = imageTitle ?? "pick_image".localized(bundle: .module)
-        self.imageMessage = imageMessage ?? "pick_image_desc".localized(bundle: .module)
-        self.videoTitle = videoTitle ?? "pick_video".localized(bundle: .module)
-        self.videoMessage = videoMessage ?? "pick_video_desc".localized(bundle: .module)
-        self.camera = camera ?? "pick_camera".localized(bundle: .module)
-        self.library = library ??  "pick_library".localized(bundle: .module)
+        self.imageTitle = imageTitle ?? NSLocalizedString("pick_image", tableName: nil, bundle: .module, comment: "")
+        self.imageMessage = imageMessage ?? NSLocalizedString("pick_image_desc", tableName: nil, bundle: .module, comment: "")
+        self.videoTitle = videoTitle ?? NSLocalizedString("pick_video", tableName: nil, bundle: .module, comment: "")
+        self.videoMessage = videoMessage ?? NSLocalizedString("pick_video_desc", tableName: nil, bundle: .module, comment: "")
+        self.camera = camera ?? NSLocalizedString("pick_camera", tableName: nil, bundle: .module, comment: "")
+        self.library = library ?? NSLocalizedString("pick_library", tableName: nil, bundle: .module, comment: "")
     }
 }
 
