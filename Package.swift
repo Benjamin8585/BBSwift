@@ -1,10 +1,11 @@
-// swift-tools-version:5.2
+// swift-tools-version:5.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "BBSwift",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v13), .macOS(.v10_15), .watchOS(.v6)
     ], products: [
@@ -22,6 +23,6 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(name: "BBSwift", dependencies: [
             "CryptoSwift"
-        ]),
+        ], resources: [.process("Resources")]),
     ]
 )

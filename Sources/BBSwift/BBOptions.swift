@@ -21,13 +21,13 @@ public struct BBPickerOptions {
     public var camera: String
     public var library: String
     
-    public init(imageTitle: String = "Pick an image", imageMessage: String = "Choose where to pick an image", videoTitle: String = "Pick a video", videoMessage: String = "Choose where to pick a video", camera: String = "from Camera", library: String = "from Library") {
-        self.imageTitle = imageTitle
-        self.imageMessage = imageMessage
-        self.videoTitle = videoTitle
-        self.videoMessage = videoMessage
-        self.camera = camera
-        self.library = library
+    public init(imageTitle: String? = nil, imageMessage: String? = nil, videoTitle: String? = nil, videoMessage: String? = nil, camera: String? = nil, library: String? = nil) {
+        self.imageTitle = imageTitle ?? "pick_image".localized(bundle: .module)
+        self.imageMessage = imageMessage ?? "pick_image_desc".localized(bundle: .module)
+        self.videoTitle = videoTitle ?? "pick_video".localized(bundle: .module)
+        self.videoMessage = videoMessage ?? "pick_video_desc".localized(bundle: .module)
+        self.camera = camera ?? "pick_camera".localized(bundle: .module)
+        self.library = library ??  "pick_library".localized(bundle: .module)
     }
 }
 
@@ -35,8 +35,8 @@ public struct BBBannerOptions {
     
     public var apiErrorTitle: String
     
-    public init(apiErrorTitle: String = "API Error") {
-        self.apiErrorTitle = apiErrorTitle
+    public init(apiErrorTitle: String? = nil) {
+        self.apiErrorTitle = apiErrorTitle ?? "api_error".localized(bundle: .module)
     }
 }
 

@@ -1,0 +1,9 @@
+
+"done" = "OK";
+"pick_image" = "Choisir une image";
+"pick_image_desc" = "Où voulez-vous choisir votre image?";
+"pick_video" = "Choisir une vidéo";
+"pick_video_desc" = "Où voulez-vous choisir votre vidéo?";
+"pick_library" = "Dans la librairie";
+"pick_camera" = "Depuis la caméra";
+"api_error" = "Erreur d'API";

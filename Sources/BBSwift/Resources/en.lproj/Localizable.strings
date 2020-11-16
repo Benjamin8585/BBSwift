@@ -1,0 +1,10 @@
+
+
+"done" = "Done";
+"pick_image" = "Pick an image";
+"pick_image_desc" = "Choose where to pick an image";
+"pick_video" = "Pick a video";
+"pick_video_desc" = "Choose where to pick a video";
+"pick_camera" = "from Camera";
+"pick_library" = "from Library";
+"api_error" = "Erreur d'API";

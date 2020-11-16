@@ -23,9 +23,11 @@ public struct GrowingTextView: View {
     let minHeight: CGFloat
     let maxHeight: CGFloat
     let accentColor: Color?
+    /// Decides whether or not you want a toolbar with the done button
+    let withToolbar: Bool
     
     /// Create a Growing text view. If no placeholder is provided the color is set to textColor. minHeight and maxheight are the min and max size of the textview
-    public init(text: Binding<String>, placeholder: String, textColor: Color? = nil, placeholderColor: Color? = nil,  minHeight: CGFloat = 39.0, maxHeight: CGFloat = 150.0, accentColor: Color?) {
+    public init(text: Binding<String>, placeholder: String, textColor: Color? = nil, placeholderColor: Color? = nil,  minHeight: CGFloat = 39.0, maxHeight: CGFloat = 150.0, accentColor: Color?, withToolbar: Bool) {
         self._text = text
         self.placeholder = placeholder
         self.textColor = textColor
@@ -33,6 +35,7 @@ public struct GrowingTextView: View {
         self.minHeight = minHeight
         self.maxHeight = maxHeight
         self.accentColor = accentColor
+        self.withToolbar = withToolbar
     }
 
     public var countedHeight: CGFloat {
@@ -40,7 +43,7 @@ public struct GrowingTextView: View {
     }
 
     public var body: some View {
-        TextViewWrapper(placeholder: self.placeholder, placeholderColor: placeholderColor ?? BBColor.Text.main.getColor(scheme: scheme), textColor: textColor ?? BBColor.Text.main.getColor(scheme: scheme), accentColor: accentColor ?? BBColor.Text.main.getColor(scheme: scheme), text: $text, focused: $focused, contentHeight: $contentHeight).frame(height: countedHeight)
+        TextViewWrapper(placeholder: self.placeholder, placeholderColor: placeholderColor ?? BBColor.Text.main.getColor(scheme: scheme), textColor: textColor ?? BBColor.Text.main.getColor(scheme: scheme), accentColor: accentColor ?? BBColor.Text.main.getColor(scheme: scheme), text: $text, focused: $focused, contentHeight: $contentHeight, showToolbar: withToolbar).frame(height: countedHeight)
     }
 }
 
@@ -50,16 +53,18 @@ public struct TextViewWrapper: UIViewRepresentable {
     let placeholderColor: UIColor
     let textColor: UIColor
     let accentColor: UIColor
+    let showToolbar: Bool
     
     @Binding var text: String
     @Binding var focused: Bool
     @Binding var contentHeight: CGFloat
 
-    public init(placeholder: String, placeholderColor: Color, textColor: Color, accentColor: Color, text: Binding<String>, focused: Binding<Bool>, contentHeight: Binding<CGFloat>) {
+    public init(placeholder: String, placeholderColor: Color, textColor: Color, accentColor: Color, text: Binding<String>, focused: Binding<Bool>, contentHeight: Binding<CGFloat>, showToolbar: Bool) {
         self.placeholder = placeholder
         self.placeholderColor = placeholderColor.uiColor()
         self.textColor = textColor.uiColor()
         self.accentColor = accentColor.uiColor()
+        self.showToolbar = showToolbar
         self._text = text
         self._focused = focused
         self._contentHeight = contentHeight
@@ -73,6 +78,13 @@ public struct TextViewWrapper: UIViewRepresentable {
         textView.backgroundColor = .clear
         textView.autocorrectionType = .no
         textView.tintColor = self.accentColor
+        if self.showToolbar {
+            let doneButton = UIBarButtonItem(title: "done".localized(bundle: .module), style: .done, target: self, action: #selector(context.coordinator.doneTapped))
+            let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+            let toolbar = UIToolbar()
+            toolbar.items = [space, doneButton]
+            textView.inputAccessoryView = toolbar
+        }
         return textView
     }
 
@@ -110,11 +122,17 @@ public struct TextViewWrapper: UIViewRepresentable {
         @Binding private var text: String
         @Binding private var focused: Bool
         @Binding private var contentHeight: CGFloat
+        
+        var textview: UITextView?
 
         public init(text: Binding<String>, focused: Binding<Bool>, contentHeight: Binding<CGFloat>) {
           self._text = text
           self._focused = focused
           self._contentHeight = contentHeight
+        }
+        
+        @objc func doneTapped() {
+            self.textview?.resignFirstResponder()
         }
 
         // MARK: - UITextViewDelegate
@@ -124,6 +142,7 @@ public struct TextViewWrapper: UIViewRepresentable {
         }
 
         public func textViewDidBeginEditing(_ textView: UITextView) {
+            self.textview = textView
             self.focused = true
         }
 
@@ -138,7 +157,7 @@ struct GrowingTextView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             Spacer()
-            GrowingTextView(text: .constant(""), placeholder: "Here is the placeholder", accentColor: Color.blue).background(Color.red)
+            GrowingTextView(text: .constant(""), placeholder: "Here is the placeholder", accentColor: Color.blue, withToolbar: true).background(Color.red)
             Spacer()
         }
     }
