@@ -8,23 +8,35 @@
 import Foundation
 import SwiftUI
 
+public enum ClosingMode {
+    case noTap, backgroundOnly, popupOnly, onTap
+}
+
 public struct PopupModifier: ViewModifier {
 
     @Binding var showPopup: Bool
     var backgroundColor: Color
-    var closeOnTap: Bool
+    var closingMode: ClosingMode
     
     public func body(content: Content) -> some View {
         ZStack {
             if self.showPopup {
                 ZStack {
                     backgroundColor.edgesIgnoringSafeArea(.all).onTapGesture {
-                        if self.closeOnTap {
+                        if self.closingMode == .backgroundOnly {
                             self.showPopup = false
                         }
                     }
-                    content
+                    content.onTapGesture {
+                        if self.closingMode == .popupOnly {
+                            self.showPopup = false
+                        }
+                    }
                 }
+            }
+        }.onTapGesture {
+            if self.closingMode == .onTap {
+                self.showPopup = false
             }
         }
     }
