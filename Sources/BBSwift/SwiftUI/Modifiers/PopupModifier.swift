@@ -27,14 +27,14 @@ public struct PopupModifier: ViewModifier {
                             self.showPopup = false
                         }
                     }
-                    content.onTapGesture {
+                    content.contentShape(Rectangle()).onTapGesture {
                         if self.closingMode == .popupOnly {
                             self.showPopup = false
                         }
                     }
                 }
             }
-        }.onTapGesture {
+        }.contentShape(Rectangle()).onTapGesture {
             if self.closingMode == .onTap {
                 self.showPopup = false
             }
