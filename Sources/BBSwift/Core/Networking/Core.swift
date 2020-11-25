@@ -62,7 +62,6 @@ public enum APIError: Error, Equatable {
     case networkCallCancelled
     case fromServer(ServerError)
     case custom(error: Error)
-    case json
     case parsingFailed(object: String, property: String?)
     
     var value: Int {
@@ -75,10 +74,8 @@ public enum APIError: Error, Equatable {
             return 2
         case .networkCallCancelled:
             return 3
-        case .json:
-            return 4
         case .parsingFailed:
-            return 5
+            return 4
         case .tokenExpired:
             return 401
         case .notFound:
@@ -110,8 +107,6 @@ public enum APIError: Error, Equatable {
             return "apierror_tokenexpired".localized()
         case .encodingFailed:
             return "apierror_encodingfailed".localized()
-        case .json:
-            return "apierror_json".localized()
         case .decodingFailed(_, _):
             return "apierror_decodingfailed".localized()
         case .parsingFailed(let object, let property):
