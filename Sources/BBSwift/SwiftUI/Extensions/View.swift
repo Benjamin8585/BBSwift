@@ -35,8 +35,8 @@ public extension View {
     }
     
     /// Transform the view as a popup
-    func popupify(showPopup: Binding<Bool>, backgroundColor: Color = Color.black.opacity(0.4), closingMode: ClosingMode = .onTap) -> some View {
-        self.modifier(PopupModifier(showPopup: showPopup, backgroundColor: backgroundColor, closingMode: closingMode))
+    func popupify(showPopup: Binding<Bool>, backgroundColor: Color = Color.black.opacity(0.4), closeOnTap: Bool = false) -> some View {
+        self.modifier(PopupModifier(showPopup: showPopup, backgroundColor: backgroundColor, closeOnTap: closeOnTap))
     }
 }
 
