@@ -10,7 +10,7 @@ import SwiftUI
 
 #if os(iOS)
 public enum NumberTextFieldType {
-    case integer, price, custom(format: String)
+    case integer, price, weight, custom(format: String)
 }
 
 public struct NumberTextField: UIViewRepresentable {
@@ -30,6 +30,8 @@ public struct NumberTextField: UIViewRepresentable {
                         return String(format: "%.0f", Double(value))
                     case .price:
                         return String(format: "%.02f", Double(value))
+                    case .weight:
+                        return String(format: "%.03f", Double(value))
                     case .custom(let format):
                         return String(format: format, Double(value))
                     }
@@ -98,7 +100,7 @@ public struct NumberTextField: UIViewRepresentable {
         }
         
         public func textFieldDidBeginEditing(_ textField: UITextField) {
-            textField.text = tf.proxy.wrappedValue ?? "0.0"
+            textField.text = tf.proxy.wrappedValue
         }
         
         public func textFieldDidEndEditing(_ textField: UITextField) {
