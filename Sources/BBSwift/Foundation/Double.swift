@@ -36,7 +36,11 @@ public extension Double {
     
     /// Transform double as displayable weight
     func weightFormatted() -> String {
-        return String(format: "%.03f", self.rounded(toPlaces: 3))
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 3
+        let formattedAmount = formatter.string(from: self.rounded(toPlaces: 3) as NSNumber)!
+        return formattedAmount
     }
     
     func removeZeros() -> String {
