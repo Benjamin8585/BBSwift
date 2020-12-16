@@ -31,7 +31,7 @@ public struct NumberTextField: UIViewRepresentable {
                     case .price:
                         return String(format: "%.02f", Double(value))
                     case .weight:
-                        return String(format: "%.03f", Double(value))
+                        return Double(value).weightFormatted()
                     case .custom(let format):
                         return String(format: format, Double(value))
                     }
