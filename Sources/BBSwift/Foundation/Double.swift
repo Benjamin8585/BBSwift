@@ -34,6 +34,11 @@ public extension Double {
         return String(format: "%.02f", self.rounded(toPlaces: 2))
     }
     
+    /// Transform double as displayable weight
+    func weightFormatted() -> String {
+        return String(format: "%.03f", self.rounded(toPlaces: 3))
+    }
+    
     func removeZeros() -> String {
          let formatter = NumberFormatter()
          let number = NSNumber(value: self)
