@@ -19,7 +19,7 @@ public struct BBTextField: UIViewRepresentable {
     public var keyboardType: UIKeyboardType
     public var autoCorrection: Bool
     
-    public init(placeholder: String, value: Binding<String?>, color: Color? = nil, keyboardType: UIKeyboardType = .default, autoCorrection: Bool = false) {
+    public init(placeholder: String, value: Binding<String>, color: Color? = nil, keyboardType: UIKeyboardType = .default, autoCorrection: Bool = false) {
         self.placeholder = placeholder
         self._value = value
         self.color = color
