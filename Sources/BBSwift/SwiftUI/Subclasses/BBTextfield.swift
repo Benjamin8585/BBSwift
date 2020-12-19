@@ -12,7 +12,7 @@ import SwiftUI
 
 public struct BBTextField: UIViewRepresentable {
     
-    @Binding public var value: String?
+    @Binding public var value: String
     
     public var placeholder: String
     public var color: Color?
@@ -61,7 +61,7 @@ public struct BBTextField: UIViewRepresentable {
         }
 
         public func textFieldDidChangeSelection(_ textField: UITextField) {
-            tf.value = textField.text
+            tf.value = textField.text ?? ""
         }
         
         public func textFieldDidBeginEditing(_ textField: UITextField) {
