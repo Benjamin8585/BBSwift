@@ -69,7 +69,7 @@ public struct NumberTextField: UIViewRepresentable {
         textfield.keyboardType = .decimalPad
         textfield.tintColor = self.accentColor?.uiColor()
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: textfield.frame.size.width, height: 44))
-        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(textfield.doneButtonTapped(button:)))
+        let doneButton = UIBarButtonItem(title: "done".localized(bundle: .module), style: .done, target: self, action: #selector(textfield.doneButtonTapped(button:)))
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolBar.setItems([space, doneButton], animated: true)
         textfield.inputAccessoryView = toolBar
