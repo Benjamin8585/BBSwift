@@ -80,7 +80,7 @@ public struct NumberTextField: UIViewRepresentable {
     }
     
     public func updateUIView(_ uiView: UITextField, context: Context) {
-        uiView.text = context.coordinator.tf.proxy.wrappedValue
+        uiView.text = self.proxy.wrappedValue
     }
     
     public func makeCoordinator() -> NumberTextField.Coordinator {
