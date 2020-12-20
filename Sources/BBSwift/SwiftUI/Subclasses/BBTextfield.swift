@@ -45,7 +45,7 @@ public struct BBTextField: UIViewRepresentable {
     }
     
     public func updateUIView(_ uiView: UITextField, context: Context) {
-        
+        uiView.text = context.coordinator.tf.value
     }
     
     public func makeCoordinator() -> BBTextField.Coordinator {
