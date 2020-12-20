@@ -14,6 +14,8 @@ public struct BBTextField: UIViewRepresentable {
     
     @Binding public var value: String
     
+    @Environment(\.font) var font: Font?
+    
     public var placeholder: String
     public var color: Color?
     public var keyboardType: UIKeyboardType
@@ -32,6 +34,9 @@ public struct BBTextField: UIViewRepresentable {
         textfield.keyboardType = self.keyboardType
         textfield.tintColor = self.color?.uiColor()
         textfield.textColor = self.color?.uiColor()
+        if let font = self.font, #available(iOS 14.0, *) {
+            textfield.font = UIFont.with(font: font)
+        }
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: textfield.frame.size.width, height: 44))
         let doneButton = UIBarButtonItem(title: "done".localized(bundle: .module), style: .done, target: self, action: #selector(textfield.doneButtonTapped(button:)))
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -46,6 +51,9 @@ public struct BBTextField: UIViewRepresentable {
     
     public func updateUIView(_ uiView: UITextField, context: Context) {
         uiView.text = self.value
+        if let font = self.font, #available(iOS 14.0, *) {
+            uiView.font = UIFont.with(font: font)
+        }
     }
     
     public func makeCoordinator() -> BBTextField.Coordinator {

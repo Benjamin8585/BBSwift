@@ -17,6 +17,8 @@ public struct NumberTextField: UIViewRepresentable {
     
     @Binding public var value : Double?
     
+    @Environment(\.font) var font: Font?
+    
     public var placeholder: String
     var accentColor: Color?
     var type: NumberTextFieldType
@@ -68,6 +70,9 @@ public struct NumberTextField: UIViewRepresentable {
         let textfield = UITextField()
         textfield.keyboardType = .decimalPad
         textfield.tintColor = self.accentColor?.uiColor()
+        if let font = self.font, #available(iOS 14.0, *) {
+            textfield.font = UIFont.with(font: font)
+        }
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: textfield.frame.size.width, height: 44))
         let doneButton = UIBarButtonItem(title: "done".localized(bundle: .module), style: .done, target: self, action: #selector(textfield.doneButtonTapped(button:)))
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
@@ -81,6 +86,9 @@ public struct NumberTextField: UIViewRepresentable {
     
     public func updateUIView(_ uiView: UITextField, context: Context) {
         uiView.text = self.proxy.wrappedValue
+        if let font = self.font, #available(iOS 14.0, *) {
+            uiView.font = UIFont.with(font: font)
+        }
     }
     
     public func makeCoordinator() -> NumberTextField.Coordinator {
