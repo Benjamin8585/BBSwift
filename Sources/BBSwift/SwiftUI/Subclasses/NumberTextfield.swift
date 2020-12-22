@@ -85,7 +85,6 @@ public struct NumberTextField: UIViewRepresentable {
     }
     
     public func updateUIView(_ uiView: UITextField, context: Context) {
-        uiView.text = self.proxy.wrappedValue
         if let font = self.font, #available(iOS 14.0, *) {
             uiView.font = UIFont.with(font: font)
         }
