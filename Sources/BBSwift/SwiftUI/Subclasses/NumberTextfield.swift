@@ -22,6 +22,7 @@ public struct NumberTextField: UIViewRepresentable {
     public var placeholder: String
     var accentColor: Color?
     var type: NumberTextFieldType
+    var alignment: NSTextAlignment
     
     var proxy: Binding<String?> {
          Binding<String?>(
@@ -59,17 +60,19 @@ public struct NumberTextField: UIViewRepresentable {
          )
      }
     
-    public init(placeholder: String, value: Binding<Double?>, type: NumberTextFieldType, accentColor: Color? = nil) {
+    public init(placeholder: String, value: Binding<Double?>, type: NumberTextFieldType, accentColor: Color? = nil, alignment: NSTextAlignment = .left) {
         self.placeholder = placeholder
         self._value = value
         self.type = type
         self.accentColor = accentColor
+        self.alignment = alignment
     }
     
     public func makeUIView(context: Context) -> UITextField {
         let textfield = UITextField()
         textfield.keyboardType = .decimalPad
         textfield.tintColor = self.accentColor?.uiColor()
+        textfield.textAlignment = self.alignment
         if let font = self.font, #available(iOS 14.0, *) {
             textfield.font = UIFont.with(font: font)
         }
