@@ -12,14 +12,16 @@ public struct CustomList<Content>: View where Content: View {
     
     private let content: Content
     var objects: [Any]
+    var spacing: CGFloat?
     
-    public init(_ objects: [Any], @ViewBuilder content: () -> Content) {
+    public init(_ objects: [Any], spacing: CGFloat? = nil, @ViewBuilder content: () -> Content) {
         self.content = content()
         self.objects = objects
+        self.spacing = spacing
     }
     
     public var body: some View {
-        VStack {
+        VStack(spacing: self.spacing) {
             GeometryReader { proxy in
                 ZStack {
                     if self.objects.count > 0 {
