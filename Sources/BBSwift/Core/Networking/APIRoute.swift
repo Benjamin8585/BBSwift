@@ -13,4 +13,5 @@ public protocol APIRouteRequestable {
     var parameters: JSON? { get }
     var headers: [String: String] { get }
     var baseUrl: String { get }
+    var redirectIfTokenExpired: Bool { get }
 }

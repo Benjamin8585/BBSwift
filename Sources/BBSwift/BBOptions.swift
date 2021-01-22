@@ -45,12 +45,14 @@ public struct BBOptions {
     
     public var picker: BBPickerOptions
     public var logRequestMode: LogRequestMode
+    public var redirectionAction: (() -> Void)?
     public var banner: BBBannerOptions
     
-    public init(picker: BBPickerOptions = BBPickerOptions(), logRequestMode: LogRequestMode = .none, banner: BBBannerOptions = BBBannerOptions()) {
+    public init(picker: BBPickerOptions = BBPickerOptions(), logRequestMode: LogRequestMode = .none, banner: BBBannerOptions = BBBannerOptions(), redirection: (() -> Void)? = nil) {
         self.picker = picker
         self.logRequestMode = logRequestMode
         self.banner = banner
+        self.redirectionAction = redirection
     }
     
 }

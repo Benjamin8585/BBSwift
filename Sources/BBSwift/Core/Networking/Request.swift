@@ -154,6 +154,9 @@ public extension APIRouteRequestable {
 
     func handleMapError(error: Error) -> APIError {
         if let error = error as? APIError {
+            if self.redirectIfTokenExpired && error == .tokenExpired {
+                BBSwift.instance.options.redirectionAction?()
+            }
             return error
         } else {
             return APIError.custom(error: error)
