@@ -15,6 +15,14 @@ public extension View {
     var typeErased: AnyView { AnyView(self) }
 }
 
+public extension View {
+    
+    /// Transform the view as a popup
+    func popupify(showPopup: Binding<Bool>, backgroundColor: Color = Color.black.opacity(0.4), closeOnTap: Bool = true) -> some View {
+        self.modifier(PopupModifier(showPopup: showPopup, backgroundColor: backgroundColor, closeOnTap: closeOnTap))
+    }
+}
+
 #if os(iOS)
 
 public extension View {
@@ -32,11 +40,6 @@ public extension View {
     /// Add a video picker to the view
     func videoPickable(video: Binding<Data?>) -> some View {
         self.modifier(VideoPickerModifier(video: video))
-    }
-    
-    /// Transform the view as a popup
-    func popupify(showPopup: Binding<Bool>, backgroundColor: Color = Color.black.opacity(0.4), closeOnTap: Bool = true) -> some View {
-        self.modifier(PopupModifier(showPopup: showPopup, backgroundColor: backgroundColor, closeOnTap: closeOnTap))
     }
 }
 
