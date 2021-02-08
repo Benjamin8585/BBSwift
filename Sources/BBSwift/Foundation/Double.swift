@@ -9,6 +9,10 @@ import Foundation
 
 public extension Double {
     
+    /// If the double is an integer, remove the useless digit
+    var integerCleaned: String {
+       return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
+    }
     
     /// Returns a random floating point number between 0.0 and 1.0, inclusive.
     static var random: Double {
@@ -33,6 +37,8 @@ public extension Double {
     func priceFormatted() -> String {
         return String(format: "%.02f", self.rounded(toPlaces: 2))
     }
+    
+    
     
     /// Transform double as displayable weight
     func weightFormatted() -> String {
