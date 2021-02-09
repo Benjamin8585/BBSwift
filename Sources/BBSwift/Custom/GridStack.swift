@@ -12,17 +12,14 @@ public struct GridStack<T: Any, Content: View>: View {
     
     public let objects: [T]
     public let columns: Int
-    public let content: (Int, Int, T?) -> Content
+    public let content: (Int, Int, T) -> Content
     
     public var rows: Int {
         return Int(ceil(Double(self.objects.count) / 3.0))
     }
     
-    public func getObject(row: Int, column: Int) -> T? {
+    public func getObject(row: Int, column: Int) -> T {
         let index = row * 3 + column
-        if index >= self.objects.count {
-            return nil
-        }
         return objects[index]
     }
 
@@ -39,7 +36,7 @@ public struct GridStack<T: Any, Content: View>: View {
         }
     }
 
-    public init(objects: [T], columns: Int, @ViewBuilder content: @escaping (Int, Int, T?) -> Content) {
+    public init(objects: [T], columns: Int, @ViewBuilder content: @escaping (Int, Int, T) -> Content) {
         self.objects = objects
         self.columns = columns
         self.content = content
