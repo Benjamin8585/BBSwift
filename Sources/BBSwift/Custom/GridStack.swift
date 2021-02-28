@@ -15,11 +15,11 @@ public struct GridStack<T: Any, Content: View>: View {
     public let content: (Int, Int, T) -> Content
     
     public var rows: Int {
-        return Int(ceil(Double(self.objects.count) / 3.0))
+        return Int(ceil(Double(self.objects.count) / Double(self.columns)))
     }
     
     public func getObject(row: Int, column: Int) -> T {
-        let index = row * 3 + column
+        let index = row * self.columns + column
         return objects[index]
     }
 
