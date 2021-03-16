@@ -120,10 +120,4 @@ public struct NumberTextField: UIViewRepresentable {
     }
 }
 
-extension UITextField {
-    @objc func doneButtonTapped(button:UIBarButtonItem) -> Void {
-       self.resignFirstResponder()
-    }
-
-}
 #endif

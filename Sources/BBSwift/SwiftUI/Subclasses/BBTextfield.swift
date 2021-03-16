@@ -1,5 +1,6 @@
 //
-//  File.swift
+//  BBTextfield.swift
+//  BBSwift
 //  
 //
 //  Created by Benjamin Bourasseau on 20/12/2020.
@@ -20,31 +21,39 @@ public struct BBTextField: UIViewRepresentable {
     public var color: Color?
     public var keyboardType: UIKeyboardType
     public var autoCorrection: Bool
+    public var autoCapitalizationType: UITextAutocapitalizationType
+    public var placeholderColor: UIColor
+    public var isSecure: Bool
     
-    public init(placeholder: String, value: Binding<String>, color: Color? = nil, keyboardType: UIKeyboardType = .default, autoCorrection: Bool = false) {
+    public init(placeholder: String, value: Binding<String>, color: Color? = nil, keyboardType: UIKeyboardType = .default, autoCorrection: Bool = false, autoCapitalizationType: UITextAutocapitalizationType = .sentences, placeholderColor: UIColor = UIColor.gray, isSecure: Bool = false) {
         self.placeholder = placeholder
         self._value = value
         self.color = color
         self.keyboardType = keyboardType
         self.autoCorrection = autoCorrection
+        self.autoCapitalizationType = autoCapitalizationType
+        self.placeholderColor = placeholderColor
+        self.isSecure = isSecure
     }
     
     public func makeUIView(context: Context) -> UITextField {
         let textfield = UITextField()
+        textfield.isSecureTextEntry = self.isSecure
         textfield.keyboardType = self.keyboardType
         textfield.tintColor = self.color?.uiColor()
         textfield.textColor = self.color?.uiColor()
+        textfield.autocapitalizationType = self.autoCapitalizationType
         if let font = self.font, #available(iOS 14.0, *) {
             textfield.font = UIFont.with(font: font)
         }
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: textfield.frame.size.width, height: 44))
-        let doneButton = UIBarButtonItem(title: "done".localized(bundle: .module), style: .done, target: self, action: #selector(textfield.doneButtonTapped(button:)))
+        let doneButton = UIBarButtonItem(title: "done".localized(), style: .done, target: self, action: #selector(textfield.doneButtonTapped(button:)))
         let space = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolBar.setItems([space, doneButton], animated: true)
         textfield.inputAccessoryView = toolBar
         textfield.delegate = context.coordinator
-        textfield.text = self.value
-        textfield.placeholder = placeholder
+        textfield.text = nil
+        textfield.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: self.placeholderColor])
         textfield.autocorrectionType = self.autoCorrection ? .yes : .no
         return textfield
     }
@@ -81,5 +90,12 @@ public struct BBTextField: UIViewRepresentable {
         }
 
     }
+}
+
+public extension UITextField {
+    @objc func doneButtonTapped(button: UIBarButtonItem) -> Void {
+       self.resignFirstResponder()
+    }
+
 }
 #endif
