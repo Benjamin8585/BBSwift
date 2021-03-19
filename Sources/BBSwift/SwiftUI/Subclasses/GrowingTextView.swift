@@ -18,16 +18,16 @@ public struct GrowingTextView: View {
     @State var contentHeight: CGFloat = 0
 
     let placeholder: String
-    let placeholderColor: Color?
-    let textColor: Color?
+    let placeholderColor: UIColor?
+    let textColor: UIColor?
     let minHeight: CGFloat
     let maxHeight: CGFloat
-    let accentColor: Color?
+    let accentColor: UIColor?
     /// Decides whether or not you want a toolbar with the done button
     let withToolbar: Bool
     
     /// Create a Growing text view. If no placeholder is provided the color is set to textColor. minHeight and maxheight are the min and max size of the textview
-    public init(text: Binding<String>, placeholder: String, textColor: Color? = nil, placeholderColor: Color? = nil,  minHeight: CGFloat = 39.0, maxHeight: CGFloat = 150.0, accentColor: Color?, withToolbar: Bool) {
+    public init(text: Binding<String>, placeholder: String, textColor: UIColor? = nil, placeholderColor: UIColor? = nil,  minHeight: CGFloat = 39.0, maxHeight: CGFloat = 150.0, accentColor: UIColor?, withToolbar: Bool) {
         self._text = text
         self.placeholder = placeholder
         self.textColor = textColor
@@ -43,7 +43,7 @@ public struct GrowingTextView: View {
     }
 
     public var body: some View {
-        TextViewWrapper(placeholder: self.placeholder, placeholderColor: placeholderColor ?? BBColor.Text.main.getColor(scheme: scheme), textColor: textColor ?? BBColor.Text.main.getColor(scheme: scheme), accentColor: accentColor ?? BBColor.Text.main.getColor(scheme: scheme), text: $text, focused: $focused, contentHeight: $contentHeight, showToolbar: withToolbar).frame(height: countedHeight)
+        TextViewWrapper(placeholder: self.placeholder, placeholderColor: placeholderColor ?? BBColor.Text.mainUI.getColor(scheme: scheme), textColor: textColor ?? BBColor.Text.mainUI.getColor(scheme: scheme), accentColor: accentColor ?? BBColor.Text.mainUI.getColor(scheme: scheme), text: $text, focused: $focused, contentHeight: $contentHeight, showToolbar: withToolbar).frame(height: countedHeight)
     }
 }
 
@@ -59,11 +59,11 @@ public struct TextViewWrapper: UIViewRepresentable {
     @Binding var focused: Bool
     @Binding var contentHeight: CGFloat
 
-    public init(placeholder: String, placeholderColor: Color, textColor: Color, accentColor: Color, text: Binding<String>, focused: Binding<Bool>, contentHeight: Binding<CGFloat>, showToolbar: Bool) {
+    public init(placeholder: String, placeholderColor: UIColor, textColor: UIColor, accentColor: UIColor, text: Binding<String>, focused: Binding<Bool>, contentHeight: Binding<CGFloat>, showToolbar: Bool) {
         self.placeholder = placeholder
-        self.placeholderColor = placeholderColor.uiColor()
-        self.textColor = textColor.uiColor()
-        self.accentColor = accentColor.uiColor()
+        self.placeholderColor = placeholderColor
+        self.textColor = textColor
+        self.accentColor = accentColor
         self.showToolbar = showToolbar
         self._text = text
         self._focused = focused
@@ -157,7 +157,7 @@ struct GrowingTextView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             Spacer()
-            GrowingTextView(text: .constant(""), placeholder: "Here is the placeholder", accentColor: Color.blue, withToolbar: true).background(Color.red)
+            GrowingTextView(text: .constant(""), placeholder: "Here is the placeholder", accentColor: UIColor.blue, withToolbar: true).background(Color.red)
             Spacer()
         }
     }

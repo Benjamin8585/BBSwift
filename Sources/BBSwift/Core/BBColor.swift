@@ -21,6 +21,19 @@ public struct Colorable {
     }
 }
 
+public struct UIColorable {
+    var lightMode: UIColor
+    var darkMode: UIColor
+    
+    func getColor(scheme: ColorScheme? = nil) -> UIColor {
+        if let scheme = scheme {
+            return scheme == .light ? self.lightMode : self.darkMode
+        } else {
+            return self.lightMode
+        }
+    }
+}
+
 public struct BBColor {
     public struct Background {
         public static var form: Colorable = Colorable(
@@ -45,6 +58,12 @@ public struct BBColor {
             lightMode: Color(red: 32/255.0, green: 31/255.0, blue: 24/255.0),
             darkMode: Color(red: 245/255.0, green: 245/255.0, blue: 247/255.0)
         )
+        
+        public static var mainUI: UIColorable = UIColorable(
+            lightMode: UIColor(red: 32/255.0, green: 31/255.0, blue: 24/255.0, alpha: 1.0),
+            darkMode: UIColor(red: 245/255.0, green: 245/255.0, blue: 247/255.0, alpha: 1.0)
+        )
+        
         public static var sectionTitleColor: Colorable = Colorable(
             lightMode: Color(red: 120/255.0, green: 120/255.0, blue: 120/255.0),
             darkMode: Color(red: 220/255.0, green: 220/255.0, blue: 220/255.0)
