@@ -15,10 +15,10 @@ public struct IsPreview: EnvironmentKey {
 public extension EnvironmentValues {
     var isPreview: Bool {
         get {
-            return self[IsPreview]
+            return self[IsPreview.self]
         }
         set {
-            self[IsPreview] = newValue
+            self[IsPreview.self] = newValue
         }
     }
 }
