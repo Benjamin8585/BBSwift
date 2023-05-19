@@ -63,7 +63,7 @@ public extension String {
     /// Localize the string. the params are here if you want to pass dynamic data
     ///     If you want the function to localize to a specific language call BBSwift.setLocalizationLanguage()
     ///     By default this will search for l
-    func localized(params: [String] = [], bundle: Bundle? = nil) -> String {
+    func localized(params: [String] = [], bundle: Bundle? = nil, fileName: String? = nil) -> String {
         var internalBundle = bundle ?? BBSwift.instance.bundle
         if let lang = BBSwift.instance.localizationLanguage {
             let path = internalBundle.path(forResource: lang, ofType: "lproj")
@@ -71,7 +71,7 @@ public extension String {
                 internalBundle = bundleCreated
             }
         }
-        return String(format: NSLocalizedString(self, tableName: nil, bundle: internalBundle, value: "", comment: ""), arguments: params)
+        return String(format: NSLocalizedString(self, tableName: fileName, bundle: internalBundle, value: "", comment: ""), arguments: params)
     }
 
     /// Transform a date string from mongoDb format to a swift Date object
